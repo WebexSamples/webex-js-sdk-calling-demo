@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Controls</title>
+
+    <link rel="stylesheet" href="../css/style.css" />
+    <link rel="stylesheet" href="controls.css" />
+  </head>
+  <body>
+    <!-- Control buttons -->
+    <div style="margin-bottom: 2rem">
+      <!-- Open the keypad -->
+      <button style="width: 2.5rem; height: 3rem; cursor: pointer">
+        <svg
+          xmlns="http://www.w3.org/2000/svg"
+          viewBox="0, 0, 32, 32"
+          data-test="dialpad"
+          class=""
+          fill="currentColor"
+          width="100%"
+          height="100%"
+          data-scale="28"
+          data-autoscale="false"
+        >
+          <path
+            d="M8.5 6.25a1.5 1.5 0 1 0 0-3 1.5 1.5 0 0 0 0 3ZM8.5 13.75a1.5 1.5 0 1 0 0-3 1.5 1.5 0 0 0 0 3ZM16 6.25a1.5 1.5 0 1 0 0-3 1.5 1.5 0 0 0 0 3ZM16 13.75a1.5 1.5 0 1 0 0-3 1.5 1.5 0 0 0 0 3ZM8.5 21.25a1.5 1.5 0 1 0 0-3 1.5 1.5 0 0 0 0 3ZM16 21.25a1.5 1.5 0 1 0 0-3 1.5 1.5 0 0 0 0 3ZM16 28.75a1.5 1.5 0 1 0 0-3 1.5 1.5 0 0 0 0 3ZM23.5 6.25a1.5 1.5 0 1 0 0-3 1.5 1.5 0 0 0 0 3ZM23.5 13.75a1.5 1.5 0 1 0 0-3 1.5 1.5 0 0 0 0 3ZM23.5 21.25a1.5 1.5 0 1 0 0-3 1.5 1.5 0 0 0 0 3Z"
+          ></path>
+        </svg>
+      </button>
+
+      <!-- Hang up -->
+      <button class="call-btn" style="background-color: #db1f2e">
+        <svg
+          xmlns="http://www.w3.org/2000/svg"
+          viewBox="0, 0, 32, 32"
+          data-test="handset"
+          class="call-icon"
+          fill="currentColor"
+          width="100%"
+          height="100%"
+          data-scale="32"
+          data-autoscale="false"
+        >
+          <path
+            d="m27.983 21.577-2.806-2.806a3.267 3.267 0 0 0-4.621.004s-1.31 1.332-1.783 1.808A7.478 7.478 0 0 1 11.4 13.21c.476-.474 1.809-1.783 1.812-1.787a3.261 3.261 0 0 0 0-4.617l-2.806-2.806a3.354 3.354 0 0 0-4.634 0l-1.5 1.5c-1.967 1.967-2.386 8.9 5.462 16.748 4.24 4.24 7.973 5.794 10.358 6.349.86.206 1.74.313 2.624.32a5.308 5.308 0 0 0 3.766-1.207l1.5-1.5a3.278 3.278 0 0 0 0-4.634Zm-.998 3.637-1.5 1.5c-.662.66-2.532 1.104-5.074.51-2.205-.515-5.673-1.967-9.679-5.972-7.199-7.2-6.829-13.386-5.462-14.753l1.5-1.5a1.908 1.908 0 0 1 2.638 0l2.806 2.806a1.852 1.852 0 0 1 .005 2.616s-1.533 1.507-1.902 1.878a1.553 1.553 0 0 0-.339 1.146 9.184 9.184 0 0 0 2.614 5.946c2.324 2.324 6.23 3.14 7.093 2.277.37-.37 1.873-1.9 1.873-1.9a1.856 1.856 0 0 1 2.621 0l2.806 2.807a1.868 1.868 0 0 1 0 2.639Z"
+          ></path>
+        </svg>
+      </button>
+    </div>
+
+    <!-- Keypad -->
+    <div class="keypad-container">
+      <div class="keypad-row" style="margin-bottom: 1.5rem; position: relative">
+        <input type="text" name="phone-number" id="phone-number" class="phone-number-input" placeholder="Dial" />
+        <button id="input-clear-btn" class="input-clear-btn">x</button>
+      </div>
+
+      <div id="keypad-btn-container">
+        <div class="keypad-row">
+          <button id="1" type="button" class="keypad-btn">1</button>
+          <button id="2" type="button" class="keypad-btn">2</button>
+          <button id="3" type="button" class="keypad-btn">3</button>
+        </div>
+
+        <div class="keypad-row">
+          <button id="4" type="button" class="keypad-btn">4</button>
+          <button id="5" type="button" class="keypad-btn">5</button>
+          <button id="6" type="button" class="keypad-btn">6</button>
+        </div>
+
+        <div class="keypad-row">
+          <button id="7" type="button" class="keypad-btn">7</button>
+          <button id="8" type="button" class="keypad-btn">8</button>
+          <button id="9" type="button" class="keypad-btn">9</button>
+        </div>
+
+        <div class="keypad-row">
+          <button id="*" type="button" class="keypad-btn">*</button>
+          <button id="0" type="button" class="keypad-btn">0</button>
+          <button id="#" type="button" class="keypad-btn">#</button>
+        </div>
+      </div>
+
+      <div class="keypad-row" style="margin-top: 1.25rem">
+        <button class="call-btn">
+          <svg
+            xmlns="http://www.w3.org/2000/svg"
+            viewBox="0, 0, 32, 32"
+            data-test="handset"
+            class="call-icon"
+            fill="currentColor"
+            width="100%"
+            height="100%"
+            data-scale="32"
+            data-autoscale="false"
+          >
+            <path
+              d="m27.983 21.577-2.806-2.806a3.267 3.267 0 0 0-4.621.004s-1.31 1.332-1.783 1.808A7.478 7.478 0 0 1 11.4 13.21c.476-.474 1.809-1.783 1.812-1.787a3.261 3.261 0 0 0 0-4.617l-2.806-2.806a3.354 3.354 0 0 0-4.634 0l-1.5 1.5c-1.967 1.967-2.386 8.9 5.462 16.748 4.24 4.24 7.973 5.794 10.358 6.349.86.206 1.74.313 2.624.32a5.308 5.308 0 0 0 3.766-1.207l1.5-1.5a3.278 3.278 0 0 0 0-4.634Zm-.998 3.637-1.5 1.5c-.662.66-2.532 1.104-5.074.51-2.205-.515-5.673-1.967-9.679-5.972-7.199-7.2-6.829-13.386-5.462-14.753l1.5-1.5a1.908 1.908 0 0 1 2.638 0l2.806 2.806a1.852 1.852 0 0 1 .005 2.616s-1.533 1.507-1.902 1.878a1.553 1.553 0 0 0-.339 1.146 9.184 9.184 0 0 0 2.614 5.946c2.324 2.324 6.23 3.14 7.093 2.277.37-.37 1.873-1.9 1.873-1.9a1.856 1.856 0 0 1 2.621 0l2.806 2.807a1.868 1.868 0 0 1 0 2.639Z"
+            ></path>
+          </svg>
+        </button>
+      </div>
+    </div>
+
+    <script src="controls.js"></script>
+  </body>
+</html>
