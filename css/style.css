@@ -2526,3 +2526,259 @@ button.btn1:hover{
 	}
 }
 /*-- //responsive --*/
+
+.nav-tabs.myTrips{
+	margin-bottom: 0;
+}
+
+.nav-tabs.myTrips li a{
+	font-size: 18px;
+	color: grey;
+	text-transform: uppercase;
+	letter-spacing: 1px;
+}
+
+.nav-tabs.myTrips li:hover a{
+	background-color: white;
+}
+
+.nav-tabs.myTrips li:hover a#upcoming-tab,
+.nav-tabs.myTrips li.active a#upcoming-tab{
+	color:green;
+}
+
+.nav-tabs.myTrips li:hover a#cancelled-tab,
+.nav-tabs.myTrips li.active a#cancelled-tab{
+	color:red;
+}
+
+.nav-tabs.myTrips li:hover a#completed-tab,
+.nav-tabs.myTrips li.active a#completed-tab{
+	color:orange;
+}
+
+.myTripsTabContent.tab-content > .active{
+	border: 1px solid #ddd;
+	border-top: 0;
+}
+
+.mytrips-page-title{
+	margin-bottom: 1.5rem;
+	margin-left: 2px;
+}
+
+.booking-entry {
+	background: rgba(0,0,0,0.02);
+	border-radius: 5px;
+	box-shadow: 0 0px 5px rgba(0,0,0,0.1);
+	border: 1px solid rgba(0,0,0,0.1);
+	margin-bottom: 30px;
+	margin-top: 15px;
+	padding: 20px;
+	position: relative;
+	overflow: hidden;
+}
+
+.booking-entry:last-child {
+	margin-bottom: 15px;
+}
+
+.booking-entry h3 {
+	margin-top: 0;
+	display: inline-block;
+	vertical-align: middle;
+	margin-right: 10px;
+	font-size: 1.2em;
+}
+
+.stars {
+	display: block;
+	font-size: 0.75em;
+	color: black;
+}
+
+.stars span.grey {
+	color: #ccc;
+}
+
+.separator {
+	border: 1px solid #ddd;
+	margin-top: 14px;
+	margin-bottom: 14px;
+}
+
+.details {
+	color: #555;
+	display: flex;
+	align-items: center;
+	margin-bottom: 10px;
+}
+
+.details span {
+	font-weight: bold;
+}
+
+.details .date {
+	display: inline-flex;
+	align-items: center;
+	padding: 8px;
+	background-color: #f8f8f8;
+	border-radius: 5px;
+	margin-right: 10px;
+}
+
+.details .date i {
+	margin-right: 5px;
+}
+
+.view-booking-btn {
+	background-color: #007bff;
+	color: white;
+	padding: 8px 15px;
+	text-align: center;
+	text-decoration: none;
+	font-size: 0.85em;
+	border: none;
+	border-radius: 5px;
+	top: 20px;
+	right: 20px;
+	cursor: pointer;
+}
+
+.view-booking-btn:hover {
+	background-color: #0056b3;
+}
+
+/* Icons from Font Awesome (Make sure to include the library) */
+.fa-calendar {
+	font-family: "Font Awesome 5 Free";
+	content: "\f073";
+	display: inline-block;
+	padding-right: 10px;
+	font-weight: 900;
+	font-size: 1em;
+}
+
+.fa-user-friends {
+	font-family: "Font Awesome 5 Free";
+	content: "\f500";
+	display: inline-block;
+	padding-right: 10px;
+	font-weight: 900;
+	font-size: 1em;
+}
+
+.details {
+    display: flex;
+    align-items: center;
+    justify-content: space-around;
+    padding: 10px 0;
+}
+
+.detail-item {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    justify-content: center;
+    flex: 1;
+}
+
+.label {
+    font-size: 1rem;
+    color: #333;
+    font-weight: bold;
+    margin-bottom: 4px;
+	padding-left: 0px;
+}
+
+.label i {
+	margin-right: 5px;
+}
+
+.info {
+    font-size: 1.1em;
+    color: #555;
+}
+
+.detail-separator {
+    height: 70px;
+    width: 1px;
+    background-color: #ccc;
+    margin: 0 20px;
+}
+
+.label.label-warning.agent-login{
+	padding: 10px 40px;
+}
+
+.buttons-container {
+    display: flex;
+    gap: 10px; /* Spacing between the buttons */
+    float: right;
+    margin-top: -3rem;
+}
+
+.call-support-btn {
+    background-color: #dc3545;
+    color: white;
+    padding: 8px 15px;
+    text-align: center;
+    text-decoration: none;
+    font-size: 0.85em;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+.call-support-btn i {
+    margin-right: 5px; /* Space between the icon and text */
+}
+
+.call-support-btn:hover {
+    background-color: #c82333;
+}
+
+.hider-harveyspecter{
+	display: none;
+}
+
+.keypad-container.agent-numpad{
+	position:fixed;
+	bottom:6rem;
+	right: 6rem;
+	width: 17rem;
+	box-shadow: 0px 3px 5px rgba(0,0,0,0.5);
+	visibility: hidden;
+	opacity: 0;
+	transition-duration: 0.5s;
+	-moz-transition-duration: 0.5s;
+	-webkit-transition-duration: 0.5s;
+	-o-transition-duration: 0.5s;
+	-ms-transition-duration: 0.5s;
+}
+
+.keypad-container.agent-numpad.show{
+	visibility: visible;
+	opacity: 1;
+	transition-duration: 0.5s;
+	-moz-transition-duration: 0.5s;
+	-webkit-transition-duration: 0.5s;
+	-o-transition-duration: 0.5s;
+}
+
+.keypad-container.agent-numpad .phone-number-input{
+	height: unset;
+}
+
+#agent-numpad-trigger{
+	position: fixed;
+	bottom: 3rem;
+	right: 3rem;
+	border: 0px solid transparent;
+	border-radius: 50%;
+	box-shadow: 0px 3px 5px rgba(0,0,0,0.5);
+	width: 3rem;
+	height: 3rem;
+	padding: 10px;
+	cursor: pointer;
+}
