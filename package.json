@@ -1,0 +1,10 @@
+{
+  "name": "webex-js-sdk-calling-demo",
+  "version": "1.0.0",
+  "main": "index.js",
+  "repository": "git@github.com:WebexSamples/webex-js-sdk-calling-demo.git",
+  "scripts": {
+    "start": "npx http-server -p 9000"
+  },
+  "license": "MIT"
+}
