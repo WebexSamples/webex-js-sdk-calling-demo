@@ -1,18 +1,52 @@
 let agentNumpad;
 const callNotification = document.getElementById('callNotification');
+const callTime = document.getElementById('call-time');
+
+let timer = {
+    minutes: 0,
+    seconds: 0,
+    interval: null,
+    start: () => {
+        timer.interval = setInterval(() => {
+            timer.seconds++;
+            if(timer.seconds === 60){
+                timer.seconds = 0;
+                timer.minutes++;
+            }
+            callTime.innerHTML = `${timer.minutes < 10 ? '0' + timer.minutes : timer.minutes}:${timer.seconds < 10 ? '0' + timer.seconds : timer.seconds}`;
+        }, 1000);
+    },
+    pause: () => {
+        clearInterval(timer.interval);
+    },
+    continue: () => {
+        timer.start();
+    },
+    stop: () => {
+        clearInterval(timer.interval);
+        timer.minutes = 0;
+        timer.seconds = 0;
+        callTime.innerHTML = '00:01';
+    },
+}
 
 callNotification.__proto__.toggle = () => {
     if(callNotification.classList.contains('show-notification')){
         callNotification.classList.remove('show-notification');
-        setTimeout(() => callNotification.classList.remove('timestate'), 2500);
+        setTimeout(() => { 
+            callNotification.classList.remove('timestate');
+            timer.stop();
+        }, 2500);
     }
     else{
         callNotification.classList.add('show-notification');
     }
+    return timer;
 }
 
 callNotification.__proto__.startTimer = () => {
     callNotification.classList.contains('timestate') ? callNotification.classList.remove('timestate') : callNotification.classList.add('timestate');
+    timer.start();
 }
 
 window.onload = () => {
