@@ -47,7 +47,8 @@ License URL: http://creativecommons.org/licenses/by/3.0/
 				</div>
 				<div class="top-banner-right">
 					<ul>
-						<li class="label label-warning agent-login">Agent Login</li>
+						<button class="label label-warning agent-login" id="agent-login-btn" onclick="initCalling()">Agent Login</button>
+						<!-- `<span>Registered, deviceId:'123123u3i24y897879'</span>`; -->
 					</ul>
 				</div>
 				<div class="clearfix"> </div>
@@ -317,7 +318,7 @@ License URL: http://creativecommons.org/licenses/by/3.0/
 			</div>
 		
 			<div class="keypad-row" style="margin-top: 1.25rem">
-				<button class="call-btn">
+				<button class="call-btn" onclick="makeCall()">
 				<svg
 					xmlns="http://www.w3.org/2000/svg"
 					viewBox="0, 0, 32, 32"
@@ -414,8 +415,15 @@ License URL: http://creativecommons.org/licenses/by/3.0/
 			</div>
 		</div>
 	</div>
+	<div id="loader-wrapper">
+		<div class="loader"></div>
+		</div>
 	<!-- //footer -->
+    <script src="https://unpkg.com/webex/umd/webex.min.js"></script>
+	<script src='https://unpkg.com/webex@2.60.0-next.2/umd/calling.min.js'></script>
 	<script type="text/javascript" src="./js/app.js"></script>
+	<script type="text/javascript" src="./js/calling-sdk.js"></script>
 	<script src="./controls/controls.js"></script>
+
 </body>	
 </html>
