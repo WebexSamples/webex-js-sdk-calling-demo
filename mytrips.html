@@ -50,6 +50,7 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
 						<li><a class="facebook" href="#"><i class="fa fa-twitter" aria-hidden="true"></i></a></li>
 						<li><a class="facebook" href="#"><i class="fa fa-dribbble" aria-hidden="true"></i></a></li>
 						<li><a class="facebook" href="#"><i class="fa fa-google-plus" aria-hidden="true"></i></a></li>
+						<button class="label label-warning customer-login" id="customer-login-btn" onclick="initCalling('customer')">Signin</button>
 					</ul>
 				</div>
 				<div class="clearfix"> </div>
@@ -110,7 +111,7 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
 													<span>★</span><span>★</span><span>★</span><span>★</span><span class="grey">★</span>
 												</div>
 												<div class="buttons-container">
-													<button class="call-support-btn" onclick="openCallWindow()"><i class="fas fa-phone"></i> Call Support</button>
+													<button class="call-support-btn" onclick="initiateCall('5002')"><i class="fas fa-phone"></i> Call Support</button>
 													<button class="view-booking-btn">View Booking</button>
 												</div>
 												<div class="separator"></div>
@@ -205,8 +206,15 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
 				<!-- //container -->
 		</div>
 		<!-- //blog -->
+		<div id="customer-loader-wrapper">
+			<div class="loader"></div>
+		</div>
 		<div id="customer-call-window">
-			<audio id="local-audio" muted="true" autoplay></audio>
+			<audio id="customer-local-audio" muted="true" autoplay></audio>
+			<audio id="customer-remote-audio" autoplay></audio>
+			<div id="call-window-footer">
+				<button id="end-call-btn" onclick="disconnectCall()"><i class="fas fa-phone-slash">End Call</i></button>
+			</div>
 		</div>
 	<script src="https://unpkg.com/webex/umd/webex.min.js"></script>
 	<script src='https://unpkg.com/webex@2.60.0-next.2/umd/calling.min.js'></script>

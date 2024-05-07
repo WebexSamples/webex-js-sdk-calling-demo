@@ -3025,11 +3025,63 @@ button.btn1:hover{
 
 .customer-call-window,
 .agent-call-window {
-	display: none;
-	width: 30rem; 
-	height: 30rem;
-	top: 20rem;
+	display: flex;
+	position: fixed;
+	z-index: 10;
+	width: 60%; 
+	height: 50%;
+	top: 38%;
+	left: 20%;
+	border-radius: 8px;
+	box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
 	background-color: white;
 	justify-content: center;
 	align-items: center;
 }
+
+.call-window-footer {
+	position: absolute;
+	bottom: 0; /* Align the footer to the bottom of the call window */
+	left: 0;
+	width: 100%; /* Make the footer span the entire width of the call window */
+	padding: 10px; /* Add some padding inside the footer */
+	background-color: #f2f2f2; /* A light grey background color for the footer */
+	border-top: 1px solid #e2e2e2; /* A subtle border line to separate the footer */
+	display: flex;
+	justify-content: space-evenly; /* Distribute buttons evenly across the footer */
+	align-items: center;
+	border-bottom-left-radius: 8px; /* Continue the border-radius from the call window */
+	border-bottom-right-radius: 8px;
+  }
+  
+  /* General style for the buttons */
+  #agent-call-window button {
+	padding: 10px 20px; /* Add some padding around the button text */
+	margin: 0 5px; /* Add some margin between buttons */
+	border: none; /* Remove default border */
+	border-radius: 4px; /* Slightly rounded corners for the buttons */
+	background-color: #007bff; /* A blue background color for the buttons */
+	color: white; /* White text color */
+	font-size: 16px; /* Set the font size */
+	cursor: pointer; /* Change the cursor to a pointer when hovering over the button */
+	transition: background-color 0.3s; /* Smooth transition for button background color */
+  }
+  
+  /* Hover effect for buttons */
+  #agent-call-window button:hover {
+	background-color: #0056b3; /* Darken the button color on hover */
+  }
+  
+  /* Specific style for the 'end-call-btn' to make it stand out */
+  .end-call-btn {
+	background-color: #dc3545; /* Red background color for the end call button */
+  }
+  
+  .end-call-btn:hover {
+	background-color: #bd2130; /* Darken the red on hover */
+  }
+  
+  /* Optional: Style for the icons within buttons, if using Font Awesome */
+  #agent-call-window .fas {
+	margin-right: 8px; /* Add some space between the icon and the button text */
+  }

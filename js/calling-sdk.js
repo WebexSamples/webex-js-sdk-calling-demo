@@ -6,11 +6,9 @@ let correlationId;
 let callHistory;
 let line;
 let call;
+let incomingCall;
 let localAudioStream;
 
-const destination = {
-    value: '88885957'
-};
 const accessToken = 'ZTAwYjFlMGUtYzViMC00OGFjLWJmZmMtYmM0MGY0YTU4MTVkOTcwZDczNjktNmU2_A52D_1704d30d-a131-4bc7-9449-948487643793'
 
 let access_token;
@@ -22,7 +20,8 @@ const customerLoginBtn = document.querySelector('#customer-login-btn');
 const loaderWrapperBtn1 = document.querySelector('#customer-loader-wrapper');
 const loaderWrapperBtn2 = document.querySelector('#agent-loader-wrapper');
 const makeCallBtn = document.querySelector('.call-support-btn');
-
+const callWindow = document.getElementById('customer-call-window');
+const callWindowFooter = document.getElementById('call-window-footer');
 
 async function initCalling(userType) {
     if (userType === 'customer') {
@@ -161,26 +160,16 @@ function registerLine(userType) {
 
     // Start listening for incoming calls
     line.on('line:incoming_call', (callObj) => {
-        call = callObj;
-        call.on('caller_id', (CallerIdEmitter) => {
-            callDetailsElm.innerText = `Name: ${CallerIdEmitter.callerId.name}, Number: ${CallerIdEmitter.callerId.num}, Avatar: ${CallerIdEmitter.callerId.avatarSrc}, UserId: ${CallerIdEmitter.callerId.id}`;
-            console.log(
+        incomingCall = callObj;
+        incomingCall.on('caller_id', (CallerIdEmitter) => {
+          console.log(
                 `callerId : Name: ${CallerIdEmitter.callerId.name}, Number: ${CallerIdEmitter.callerId.name}, Avatar: ${CallerIdEmitter.callerId.avatarSrc}, UserId: ${CallerIdEmitter.callerId.id}`
             );
-            if (CallerIdEmitter.callerId.avatarSrc) {
-                img.src = CallerIdEmitter.callerId.avatarSrc;
-                console.log(img.src);
-                imageElm.appendChild(img);
-            }
-        });
-
-        call.on('disconnect', () => {
-            callDetailsElm.innerText = `${correlationId}: Call Disconnected`;
-            makeCallBtn.disabled = false;
-            endElm.disabled = true;
-            muteElm.value = 'Mute';
-            holdResumeElm.value = 'Hold';
-            answerElm.disabled = true;
+            // if (CallerIdEmitter.callerId.avatarSrc) {
+            //     img.src = CallerIdEmitter.callerId.avatarSrc;
+            //     console.log(img.src);
+            //     imageElm.appendChild(img);
+            // }
         });
 
         callNotifyEvent.detail.callObject = callObj;
@@ -192,73 +181,89 @@ function registerLine(userType) {
                 `APP.JS::  Incoming Call with broadworksCorrelationInfo: ${broadworksCorrelationInfo}`
             );
         }
-        callListener.dispatchEvent(callNotifyEvent);
+        // callListener.dispatchEvent(callNotifyEvent);
         console.log('Waiting for User to answer the call...');
     });
 }
 
-async function openCallWindow() {
-    const callWindow = document.getElementById('customer-call-window');
-    callWindow.style.display = 'flex';
-    await getMediaStreams();
-    makeCall();
-}
-
-function makeCall() {
+async function initiateCall(number) {
+    const destination = {
+        value: number
+    };
+    callWindow.classList.add('customer-call-window');
+    callWindowFooter.classList.add('call-window-footer');
+    await getMediaStreams(false);
     console.log(destination.value);
-    // makeCallBtn.disabled = true;
-    // outboundEndElm.disabled = false;
     call = line.makeCall({
         type: 'uri',
         address: destination.value,
     });
 
     call.on('caller_id', (CallerIdEmitter) => {
-        callDetailsElm.innerText = `Name: ${CallerIdEmitter.callerId.name}, Number: ${CallerIdEmitter.callerId.num}, Avatar: ${CallerIdEmitter.callerId.avatarSrc} , UserId: ${CallerIdEmitter.callerId.id}`;
         console.log(
             `callerId : Name: ${CallerIdEmitter.callerId.name}, Number: ${CallerIdEmitter.callerId.num}, Avatar: ${CallerIdEmitter.callerId.avatarSrc}, UserId: ${CallerIdEmitter.callerId.id}`
         );
-        if (CallerIdEmitter.callerId.avatarSrc) {
-            img.src = CallerIdEmitter.callerId.avatarSrc;
-            imageElm.appendChild(img);
-        }
+        // if (CallerIdEmitter.callerId.avatarSrc) {
+        //     img.src = CallerIdEmitter.callerId.avatarSrc;
+        //     imageElm.appendChild(img);
+        // }
     });
 
     call.on('progress', (correlationId) => {
-        callDetailsElm.innerText = `${correlationId}: Call Progress`;
+
     });
+
     call.on('connect', (correlationId) => {
-        callDetailsElm.innerText = `${correlationId}: Call Connect`;
-    });
-    call.on('established', (correlationId) => {
-        callDetailsElm.innerText = `${correlationId}: Call Established`;
-    });
-
-    call.on('disconnect', (correlationId) => {
-        callDetailsElm.innerText = `${correlationId}: Call Disconnected`;
-        makeCallBtn.disabled = false;
-        endElm.disabled = true;
-        muteElm.value = 'Mute';
-        outboundEndElm.disabled = true;
-
-        if (transferInitiated) {
-            transferDetailsElm.innerText = `Transferred Successfully`;
-            transferInitiated = false;
-            transferElm.innerHTML = 'Transfer';
-        }
+   
     });
 
     call.on('remote_media', (track) => {
-        document.getElementById('remote-audio').srcObject = new MediaStream([track]);
+        document.getElementById('customer-remote-audio').srcObject = new MediaStream([track]);
     });
 
     call.dial(localAudioStream);
+    makeCallBtn.disabled = false;
+
+    call.on('disconnect', (correlationId) => {
+        callWindow.classList.remove('customer-call-window');
+    });
 }
 
-async function getMediaStreams() {
-    const localAudioElem = document.getElementById('local-audio');
-    localAudioStream = await Calling.createMicrophoneStream({ audio: true });
+async function answerCall() {
+    const callWindow = document.getElementById('agent-call-window');
+    callWindow.classList.add('agent-call-window');
+    callWindowFooter.classList.add('call-window-footer');
+    await getMediaStreams(true);
+
+    incomingCall.answer(localAudioStream);
+
+    incomingCall.on('remote_media', (track) => {
+        document.getElementById('agent-remote-audio').srcObject = new MediaStream([track]);
+    });
+
+
+    incomingCall.on('disconnect', (correlationId) => {
+        callWindow.classList.remove('agent-call-window');
+        callWindowFooter.classList.remove('call-window-footer');
+    });
+}
+
+
+async function getMediaStreams(agent) {
+    let localAudioElem;
+    if (agent) {
+        localAudioElem = document.getElementById('agent-local-audio');
+        localAudioStream = await Calling.createMicrophoneStream({audio: true});
+    } else {
+        localAudioElem = document.getElementById('customer-local-audio');
+        localAudioStream = await Calling.createMicrophoneStream({ audio: true });
+    }
 
     localAudioElem.srcObject = localAudioStream.outputStream;
-    makeCallBtn.disabled = false;
+}
+
+function disconnectCall() {
+    call.end();
+    callWindow.classList.remove('customer-call-window');
+    callWindowFooter.classList.remove('call-window-footer');
 }
