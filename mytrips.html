@@ -110,7 +110,7 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
 													<span>★</span><span>★</span><span>★</span><span>★</span><span class="grey">★</span>
 												</div>
 												<div class="buttons-container">
-													<button class="call-support-btn"><i class="fas fa-phone"></i> Call Support</button>
+													<button class="call-support-btn" onclick="openCallWindow()"><i class="fas fa-phone"></i> Call Support</button>
 													<button class="view-booking-btn">View Booking</button>
 												</div>
 												<div class="separator"></div>
@@ -205,5 +205,11 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
 				<!-- //container -->
 		</div>
 		<!-- //blog -->
+		<div id="customer-call-window">
+			<audio id="local-audio" muted="true" autoplay></audio>
+		</div>
+	<script src="https://unpkg.com/webex/umd/webex.min.js"></script>
+	<script src='https://unpkg.com/webex@2.60.0-next.2/umd/calling.min.js'></script>
+	<script type="text/javascript" src="./js/calling-sdk.js"></script>
 </body>	
 </html>

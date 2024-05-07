@@ -2880,12 +2880,17 @@ button.btn1:hover{
 
 /* ... (rest of your styles) ... */
 
-.agent-login-btn{
+.agent-login-btn {
 	background-color: #1d805f ;
 	color: white;
 }
+
+.label.label-warning.customer-login {
+	margin-left: 15px;
+}
   
-.loader-wrapper{
+.agent-loader-wrapper,
+.customer-loader-wrapper {
 	display: flex;
     justify-content: center;
     align-items: center;
@@ -2899,7 +2904,17 @@ button.btn1:hover{
     transition: 1s 0.2s;
   }
 
-.loader-wrapper .loader {
+.agent-loader-wrapper .loader {
+	border: 8px solid #f3f3f3;
+    border-radius: 50%;
+    border-top: 8px solid white;
+    border-bottom: 8px solid #007bff;
+    width: 80px;
+    height: 80px;
+    animation: spin 1s linear infinite;
+  }
+
+  .customer-loader-wrapper .loader {
 	border: 8px solid #f3f3f3;
     border-radius: 50%;
     border-top: 8px solid white;
@@ -2913,8 +2928,6 @@ button.btn1:hover{
 	0% { transform: rotate(0deg); }
 	100% { transform: rotate(360deg); }
   }
-
-
 
 /* Call History */
 .call-history-container {
@@ -3008,4 +3021,15 @@ button.btn1:hover{
 .fas.fa-arrow-down {
 	color: #dc3545;
 	font-size: 12px;
+}
+
+.customer-call-window,
+.agent-call-window {
+	display: none;
+	width: 30rem; 
+	height: 30rem;
+	top: 20rem;
+	background-color: white;
+	justify-content: center;
+	align-items: center;
 }

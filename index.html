@@ -47,6 +47,7 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
 						<li><a class="facebook" href="#"><i class="fa fa-twitter" aria-hidden="true"></i></a></li>
 						<li><a class="facebook" href="#"><i class="fa fa-dribbble" aria-hidden="true"></i></a></li>
 						<li><a class="facebook" href="#"><i class="fa fa-google-plus" aria-hidden="true"></i></a></li>
+						<button class="label label-warning customer-login" id="customer-login-btn" onclick="initCalling('customer')">Signin</button>
 					</ul>
 				</div>
 				<div class="clearfix"> </div>
@@ -160,6 +161,12 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
 			</div>
 		</div>
 	</div>
+	<div id="customer-loader-wrapper">
+		<div class="loader"></div>
+	</div>
 	<script src="js/SmoothScroll.min.js"></script>
+	<script src="https://unpkg.com/webex/umd/webex.min.js"></script>
+	<script src='https://unpkg.com/webex@2.60.0-next.2/umd/calling.min.js'></script>
+	<script type="text/javascript" src="./js/calling-sdk.js"></script>
 </body>	
 </html>
