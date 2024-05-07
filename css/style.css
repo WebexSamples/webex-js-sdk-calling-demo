@@ -2922,7 +2922,9 @@ button.btn1:hover{
 	background-color: aliceblue;
 	border-radius: 8px;
 	box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-	overflow: hidden;
+	height: 30rem;
+	max-height: 30rem;
+	overflow: scroll;
 	position: fixed;
 	top: 200px;
 	left: 40px;
@@ -2948,10 +2950,6 @@ button.btn1:hover{
 .call-history-item:hover{
 	cursor: pointer;
 	background-color: #c9e4fb;
-}
-
-.call-history-item:last-child{
-	border-bottom: none;
 }
 
 .call-history-item .make-call{
