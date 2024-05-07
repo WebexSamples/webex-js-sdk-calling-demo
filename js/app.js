@@ -67,3 +67,39 @@ function swapDivs() {
         harveyspecter[i].style.display = 'block';
     }
 }
+
+function renderCallHistoryItem(call) {
+    const avatarInitial = call.other.name.charAt(0).toUpperCase();
+    const directionIcon = call.direction === 'OUTGOING' ? 'fa-arrow-up' : 'fa-arrow-down';
+    const callDate = new Date(call.startTime).toLocaleDateString();
+    const callTime = new Date(call.startTime).toLocaleTimeString();
+
+    return `
+      <div class="call-history-item">
+        <div class="call-avatar">${avatarInitial}</div>
+        <div class="call-details">
+          <div class="call-name">${call.other.name}</div>
+          <div class="call-phone">${call.other.phoneNumber}</div>
+        </div>
+        <div class="call-indicator">
+          <div class="call-date">${callDate}</div>
+          <i class="fas ${directionIcon}"></i>
+        </div>
+        <div class="make-call">
+            <button class="attend-call-btn"><i class="fas fa-phone"></i></button>
+        </div>
+      </div>
+    `;
+}
+
+function renderCallHistory(callHistoryData) {
+    const callHistoryList = document.getElementById('callHistoryList');
+    let callHistoryHTMLHeader = `
+        <div class="call-history-header">
+            Call History
+        </div>
+    `
+    let callHistoryHTML = callHistoryData.map(renderCallHistoryItem).join('');
+    callHistoryList.innerHTML = callHistoryHTMLHeader+callHistoryHTML;
+    callHistoryList.classList.add('show-history');
+}

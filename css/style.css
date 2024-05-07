@@ -2914,3 +2914,100 @@ button.btn1:hover{
 	100% { transform: rotate(360deg); }
   }
 
+
+
+/* Call History */
+.call-history-container {
+	width: 20rem;
+	background-color: aliceblue;
+	border-radius: 8px;
+	box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+	overflow: hidden;
+	position: fixed;
+	top: 200px;
+	left: 40px;
+	visibility: hidden;
+	opacity: 0;
+	transition: visibility 0.3s ease, opacity 0.3s ease;
+}
+
+.call-history-container.show-history{
+	opacity: 1;
+	visibility: visible;
+}
+
+.call-history-item {
+	display: flex;
+	align-items: center;
+	justify-content: space-between;
+	border-bottom: 1px solid #ccc;
+	padding: 10px 15px;
+	transition: background-color 0.3s ease;
+}
+
+.call-history-item:hover{
+	cursor: pointer;
+	background-color: #c9e4fb;
+}
+
+.call-history-item:last-child{
+	border-bottom: none;
+}
+
+.call-history-item .make-call{
+	margin-left: 15px;
+}
+
+.call-history-item .make-call .fa-phone{
+	font-size: 14px;
+}
+
+.call-history-header{
+	color: black;
+	padding: 10px;
+	border-bottom: 1px solid #ccc;
+}
+
+.call-avatar {
+	width: 35px;
+	height: 35px;
+	border-radius: 20px;
+	background-color: #007bff;
+	color: white;
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	margin-right: 15px;
+	font-size: 20px;
+}
+
+.call-details {
+	flex-grow: 1;
+}
+
+.call-name {
+	font-weight: bold;
+}
+
+.call-date, .call-time {
+	color: #666;
+	font-size: 14px;
+}
+
+.call-indicator {
+	flex-shrink: 0;
+	display: flex;
+	flex-direction: column;
+	align-items: flex-end;
+	font-size: 1.5rem;
+}
+
+.fas.fa-arrow-up {
+	color: #28a745;
+	font-size: 12px;
+}
+
+.fas.fa-arrow-down {
+	color: #dc3545;
+	font-size: 12px;
+}

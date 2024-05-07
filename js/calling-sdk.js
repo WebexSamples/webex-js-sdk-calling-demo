@@ -11,7 +11,7 @@ let localAudioStream;
 const destination = {
     value: '88885957'
 };
-const accessToken = 'eyJhbGciOiJSUzI1NiJ9.eyJjbHVzdGVyIjoiQTUyRCIsInByaXZhdGUiOiJleUpqZEhraU9pSktWMVFpTENKbGJtTWlPaUpCTVRJNFEwSkRMVWhUTWpVMklpd2lZV3huSWpvaVpHbHlJbjAuLkZGaFlLZkh4N3lyZWtnRFhRVzRCWWcuNV85MC12Mm9jdko4YjVZcDdsc0xZLWF3V3JVZFA4aFVBQmh3TTZxcElSbGd1UzBJTm1HeDk0TkptZ3hvWHFnRnJQMlFaMFQzcHJwMWVPa0NESWJqUzNNWHpnQnBFVm1TdEtGLTdUaThDVlRQdU41SHQ5QlhkdEluXzFzWjBuU2pyQlNUMllzOWNkMGstcWs1MzlpckNsR21Td3dpcnVMSi15eERVMXZ2RmVuUmR6VWEtcGliVHM2TV9EbHI3SV8yMnhXU3ltVXF2dFFvNGM2X1ZXLVE5MXd0cnVsbDlfMXc1QW9lTksydTJQbmtVdHNPZVV2WUZwSDRZTXNSNDFTT2QtUlZMMmRwMzB6UTRsSnpwV1IzN2xkcUNnMzRCUjlxUl9pOFl1cXUzUnljQ0pFYjZDQ1h6WU5lamJRdGRqUjNLNVNqUUIxbU1TOEE0em9iQ2xROHozblpsd25Nb2Z3REdyZHRpVEZpNS1fdldueWJaLWtkSTJpWVJvaW5LVWV0UWpWZmt2SlZSWXJMdURVZzc4UW5tdUNJUE94TFB5S211ZXd3cTRMU0lOZUVGek1meVBKV2ViYlZoU3BpODJmWGVpTUNLc1ltRU53YVdIMWgzeGloTjhZYWtFZjVSSkZwVG1GSDJ3ZTI5aWNnNWxTb3M3ZW1hTjcwd29pMHdIRFNfckNlN1BiZ3ZTRzB4YUNaXzFEWUhNbnUxOW4xR2pnQ2xkTzNhZ0VHbGYyQzJjWTUtbTJxT2tuaHNGbDk1elJncERZMjZaa3A3LXpmbXppTzZKR0JNQVl4ZlVSY1M4UUFITGxCMFZGQVZEOG53YmVKMjNtX0Qtc25McU5UNkdOREtHanJ2dm5MQUtiVV9LaUdSNF9XSWUxZlRORUM0QW5Od1NPR0dLcDFnX2hyOWJCYVNjTDAzeUJEZEM3WXZ0eFF2eFp2UE95eDAtZWtocFVwRWY5S1RMa3RYTk9IRy10c2FzUm1aWXlnYTNLcFRBdnJ4NUc2bzAyc21TTnJ2VXpHWFpoc0VqTWZBcXJRNFVVb2NhSWJzc0sxTWZsQ29nNG1mSzlDY3FkRzIzZy5zdFd2V2lmQ3lzQVBfUW9FTFVLaTRBIiwidXNlcl90eXBlIjoidXNlciIsInRva2VuX2lkIjoiQWFaM3IwTVdZNVpqSTRaamN0WVdRME1pMDBORGczTFRrNE1EZ3RNVE15TXpCak1qZGxObVkwWkRSbU9UZzJaRGd0WWpWayIsInJlZmVyZW5jZV9pZCI6ImE3NDQwYzJkLTViY2YtNDk4My05ZWUzLTM5YzgxZWM2NzQ0YyIsImlzcyI6Imh0dHBzOlwvXC9pZGJyb2tlcmJ0cy53ZWJleC5jb21cL2lkYiIsInVzZXJfbW9kaWZ5X3RpbWVzdGFtcCI6IjIwMjIwODEwMTUwMzA3LjcxMloiLCJyZWFsbSI6IjE3MDRkMzBkLWExMzEtNGJjNy05NDQ5LTk0ODQ4NzY0Mzc5MyIsImNpc191dWlkIjoiNjA2MDg4Y2YtMzQ1ZS00MWYwLWFlOTAtOTkyMjk3YmNiMzg5IiwidG9rZW5fdHlwZSI6IkJlYXJlciIsImV4cGlyeV90aW1lIjoxNzE1MDQzMzk0MjAzLCJjbGllbnRfaWQiOiJDNjRhYjA0NjM5ZWVmZWU0Nzk4ZjU4ZTdiYzNmZTAxZDQ3MTYxYmUwZDk3ZmYwZDMxZTA0MGE2ZmZlNjZkN2YwYSJ9.QPfTNF4vyu65h9zPZcc3UYLjtQMP0zNOTXZ_iR3aqOsHg7JX1xmQEDQ2aTRF-U1qxTDO-btBLjRC_19oCN71PI7j2-ziigy1guykjsNTrVYH0XzqGRBzGjYiwZ8-Nx2rRUYmG82Exbc77xzG9K2Ik2XejfcHG9P8hkU7Qt8oB6DB2LdGOc2guZYG2myWyuiGISE_FTr525pCWL11XivW-YP8m_nw7iAHLZG_9Xp9qORPdDgPhJ0Niw2YIZvfoq0yWYb6MNFdfthgRZPQbFHoNuL7vKh1UlK-qNugHe3SjxJ9L4zu5ycblK9xG2HiD5K60mAaISzn7ykQ_v2ohQJJfQ'
+const accessToken = 'ZTAwYjFlMGUtYzViMC00OGFjLWJmZmMtYmM0MGY0YTU4MTVkOTcwZDczNjktNmU2_A52D_1704d30d-a131-4bc7-9449-948487643793'
 
 // Create the Webex configuration
 // authentication 
@@ -61,6 +61,7 @@ async function initCalling() {
 
     const clientConfig = {
         calling: true,
+        callHistory: true,
         callSettings: true,
     }
 
@@ -97,6 +98,23 @@ async function initCalling() {
 
             if (window.callHistory === undefined) {
                 callHistory = window.callHistory = calling.callHistoryClient;
+                callHistory.on('callHistory:user_recent_sessions', (sessionData) => {
+                    console.log('Users recent session data : ', sessionData.data.userSessions.userSessions[0]);
+                });
+
+                const numberOfDays = 7,
+                callHistoryLimit = 20,
+                callHistorySort = 'ASC',
+                callHistorySortBy = 'startTime';
+
+                const callHistoryResponse = await callHistory.getCallHistoryData(
+                    numberOfDays,
+                    callHistoryLimit,
+                    callHistorySort,
+                    callHistorySortBy
+                );
+
+                renderCallHistory(callHistoryResponse.data.userSessions);
             }
             fetchLines();
             getMediaStreams();
