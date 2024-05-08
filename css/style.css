@@ -3026,6 +3026,7 @@ button.btn1:hover{
 .customer-call-window,
 .agent-call-window {
 	display: flex;
+	flex-direction: column;
 	position: fixed;
 	z-index: 10;
 	width: 60%; 
@@ -3038,6 +3039,19 @@ button.btn1:hover{
 	justify-content: center;
 	align-items: center;
 }
+
+.call-window-header {
+	padding: 10px;
+	border-top-left-radius: 8px; /* Continue the border-radius from the call window */
+	border-top-right-radius: 8px;
+	/* Additional header styles if needed */
+  }
+  
+.call-window-body {
+	flex-grow: 1; /* Allow the body to grow and fill available space */
+	padding: 10px;
+	/* Additional body styles if needed */
+  }
 
 .call-window-footer {
 	position: absolute;

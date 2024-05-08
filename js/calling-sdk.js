@@ -21,11 +21,15 @@ const loaderWrapperBtn1 = document.querySelector('#customer-loader-wrapper');
 const loaderWrapperBtn2 = document.querySelector('#agent-loader-wrapper');
 const makeCallBtn = document.querySelector('.call-support-btn');
 const callWindow = document.getElementById('customer-call-window');
+const callWindowHeader = document.getElementById('call-window-header');
+const callWindowBody = document.getElementById('call-window-body')
 const callWindowFooter = document.getElementById('call-window-footer');
+const callerName = document.getElementById('caller-name');
+const callerNumber = document.getElementById('caller-number');
 
 async function initCalling(userType) {
     if (userType === 'customer') {
-        access_token = 'eyJhbGciOiJSUzI1NiJ9.eyJjbHVzdGVyIjoiUDBBMSIsInByaXZhdGUiOiJleUpqZEhraU9pSktWMVFpTENKbGJtTWlPaUpCTVRJNFEwSkRMVWhUTWpVMklpd2lZV3huSWpvaVpHbHlJbjAuLmtwSFN1cDl3OGUzdnZEeWFJc1RlUWcuYjBNbGZDWDIxaGRubktoM1A2ak1QcnpybkU2ZUlsdmp5bXlCNG81VkRzaXRxQS1ER1JkSFB4bGE0Q1o0d1B0UDJLOUdxd0hwMUhDQk4zN3JwUHZsSkRYeHp1cEcwM0JmQWlYd3ZSM2EtenliUV82U1FYelEtUGhHaWdTZ281SEJ5REF5eUNTWER3VUZRbXRILVlxWUNNZDhlR0laNXBEZlQ5TjJFM184SU9ueW92MjYyZXhkdWhYM213QklWaDI0X0dBUkhzU3lFR0ZVeG03bFltOU5zekZBX0NRVktsTFkwa0VvTEdLcEtiWDdaeF9qZHIzZHNNSVljemd5VllUYmpjeW5XQU5SYVRpVUU3M3lxS2NaLTZ1R3VLYTVkZjBYQS1BZ1Vqd05uYlNrVnE5Z2VuNGhFN21xUWV5dlVlQ180ZTNDRmxxcENEd0NCQ1FzRWhTell1VF8xdXJxYUdzM09pbHFjbVJDemt2ZlludGZrNHY3Tkt3OThqLTB3SG54OTJTWFpIRlhQRWZ3NlhVNTNaS3pxMUtDbjlZWGxSbkU5S0xJREY3M1VkcXJwdXNVVERORzZqY2t6UGhTZ3FwcllFZF9PWi1DUEtPT3o2cEYybUZDUWZhMDRLZDktNkN4dFFSVDRzSWhOWkRQZTQtdUlnWHBWcmMySDR2SGxXdUJ6Z1ZET1V4ZUZwOUJsSHR3Zlo1MmQ1T2Z0ZEFJS1pNNGhuTUF2VHNGTVZGelZEZHA2eThpZFpyOGVUbHJ0dUY2bEI3aHlEdElyYmszMHRMQ2NXdlVnZEd2WTJoOU1KTTlDSEd3UG13SmZFTHE2d1VCMEVrREt0M09BTE1ZQkRKeVNYaWZqbVk1N0hpMXN5LUZWOEpUUDR0TDJ4ZUJrUks5R2ZENEo1d3VMNU9tcVlYaTE0UjNKM29sVHQyN2tjNHNUbE5Hc2xNcm9nUWJDSmM3WG5QT1hab2FoX0NkeTFvZlhpZjh4dTdGNWZGTkFOY3UyZ1JIVFYyOEpERVdzdnJZdy1MR2ZZUXltek4xWXZJZEVuRHJ4OGhveXRBRUUwemVPelJaTTB1Q1g4US42VkJUeFpRWVE4SE1hU0RVWER3YzFRIiwidXNlcl90eXBlIjoidXNlciIsInRva2VuX2lkIjoiQWFaM3IwWmpNNU5qZ3habUl0TkdVNU1DMDBZemN3TFRnMU4ySXRaV1ptTUdaaU5XVXhNamt5WTJReU1tRmhOV0l0T1RBdyIsInJlZmVyZW5jZV9pZCI6ImQwMTEzZmQxLWM2NWUtNGZkMy04NDllLWMxYzUzNmVhMzdmYyIsImlzcyI6Imh0dHBzOlwvXC9pZGJyb2tlci1iLXVzLndlYmV4LmNvbVwvaWRiIiwidXNlcl9tb2RpZnlfdGltZXN0YW1wIjoiMjAyNDAyMjYxMDM4MDYuODgzWiIsInJlYWxtIjoiYjY1N2ZjZjMtNmIwNi00NmE0LWFiMGUtZjIzZmNlYjdhNDQ3IiwiY2lzX3V1aWQiOiI0ODQ0OGZhNy03MmM5LTRhZWItYTgzZi1kYjgyZTk3MWJlNjQiLCJ0b2tlbl90eXBlIjoiQmVhcmVyIiwiZXhwaXJ5X3RpbWUiOjE3MTUxMzIwNjQ4NDUsImNsaWVudF9pZCI6IkM2NGFiMDQ2MzllZWZlZTQ3OThmNThlN2JjM2ZlMDFkNDcxNjFiZTBkOTdmZjBkMzFlMDQwYTZmZmU2NmQ3ZjBhIn0.SppxJ5Op2RyrBXOUUaqqepSy37h9jF1oea-8oKqk8kloTcU_qLf7oAGMZVul7ftobFoO1jMx9eyLb6MjjWU4fIhfILUveT_xMrRNGeo_jePgNSh2VL3RodWZIVVkbSmZBaYuFRmyRGNMx_XkuzYRwt4-Xl9okQjXTo8GS8PUVBbIFwphyoPBpnfW1JLOrXjcJM9Gw7hGqZBchQCS6lvoxtWJV4S4vPj7sr1UBoXdEw3jSoWFNaFF_F4BAI608KUggmx_LseTKLoa1WRBGuJsgMXjPO4jGgXWwzu2XbTCBsOSw14eudzFgcKWzLUPW-ZAATtcmNH6-eGViOoG8SxI4Q';
+        access_token = 'ZGE1OTZlYmQtOTZjNy00NWJlLThkMzUtZWY1OWE3ZmEwZGRmMmNlYTVlNTMtNWI3_P0A1_b657fcf3-6b06-46a4-ab0e-f23fceb7a447';
         loaderWrapperBtn1.classList.add('customer-loader-wrapper');
     } else {
         access_token = 'NTRjMmFmYmQtOTJmNi00NTQ4LWI5ZDMtZDU4YjRjY2Q1Nzk2MjIxOThkMzktOTAx_P0A1_b657fcf3-6b06-46a4-ab0e-f23fceb7a447';
@@ -160,11 +164,15 @@ function registerLine(userType) {
 
     // Start listening for incoming calls
     line.on('line:incoming_call', (callObj) => {
+        callNotification.toggle();
         incomingCall = callObj;
         incomingCall.on('caller_id', (CallerIdEmitter) => {
           console.log(
-                `callerId : Name: ${CallerIdEmitter.callerId.name}, Number: ${CallerIdEmitter.callerId.name}, Avatar: ${CallerIdEmitter.callerId.avatarSrc}, UserId: ${CallerIdEmitter.callerId.id}`
+                `callerId : Name: ${CallerIdEmitter.callerId.name}, Number: ${CallerIdEmitter.callerId.num}, Avatar: ${CallerIdEmitter.callerId.avatarSrc}, UserId: ${CallerIdEmitter.callerId.id}`
             );
+
+            callerName.innerText = CallerIdEmitter.callerId.name;
+            callerNumber.innerText = CallerIdEmitter.callerId.num;
             // if (CallerIdEmitter.callerId.avatarSrc) {
             //     img.src = CallerIdEmitter.callerId.avatarSrc;
             //     console.log(img.src);
@@ -191,6 +199,8 @@ async function initiateCall(number) {
         value: number
     };
     callWindow.classList.add('customer-call-window');
+    callWindowHeader.classList.add('call-window-header');
+    callWindowBody.classList.add('call-window-body');
     callWindowFooter.classList.add('call-window-footer');
     await getMediaStreams(false);
     console.log(destination.value);
@@ -203,6 +213,8 @@ async function initiateCall(number) {
         console.log(
             `callerId : Name: ${CallerIdEmitter.callerId.name}, Number: ${CallerIdEmitter.callerId.num}, Avatar: ${CallerIdEmitter.callerId.avatarSrc}, UserId: ${CallerIdEmitter.callerId.id}`
         );
+        callerName.innerText = CallerIdEmitter.callerId.name;
+        callerNumber.innerText = CallerIdEmitter.callerId.num;
         // if (CallerIdEmitter.callerId.avatarSrc) {
         //     img.src = CallerIdEmitter.callerId.avatarSrc;
         //     imageElm.appendChild(img);
@@ -230,8 +242,11 @@ async function initiateCall(number) {
 }
 
 async function answerCall() {
+    callNotification.toggle();
     const callWindow = document.getElementById('agent-call-window');
     callWindow.classList.add('agent-call-window');
+    callWindowHeader.classList.add('call-window-header');
+    callWindowBody.classList.add('call-window-body');
     callWindowFooter.classList.add('call-window-footer');
     await getMediaStreams(true);
 
@@ -244,6 +259,8 @@ async function answerCall() {
 
     incomingCall.on('disconnect', (correlationId) => {
         callWindow.classList.remove('agent-call-window');
+        callWindowHeader.classList.remove('call-window-header');
+        callWindowBody.classList.remove('call-window-body');
         callWindowFooter.classList.remove('call-window-footer');
     });
 }
@@ -265,5 +282,7 @@ async function getMediaStreams(agent) {
 function disconnectCall() {
     call.end();
     callWindow.classList.remove('customer-call-window');
+    callWindowHeader.classList.remove('call-window-header');
+    callWindowBody.classList.remove('call-window-body');
     callWindowFooter.classList.remove('call-window-footer');
 }

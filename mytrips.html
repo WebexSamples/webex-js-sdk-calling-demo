@@ -210,8 +210,15 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
 			<div class="loader"></div>
 		</div>
 		<div id="customer-call-window">
-			<audio id="customer-local-audio" muted="true" autoplay></audio>
-			<audio id="customer-remote-audio" autoplay></audio>
+			<div id="call-window-header">
+				<h1>Call Timer</h1>
+			</div>
+			<div id="call-window-body">
+				<h4 id="caller-name"></h4>
+				<h5 id="caller-number"></h5>
+				<audio id="customer-local-audio" muted="true" autoplay></audio>
+				<audio id="customer-remote-audio" autoplay></audio>
+			</div>
 			<div id="call-window-footer">
 				<button id="end-call-btn" onclick="disconnectCall()"><i class="fas fa-phone-slash">End Call</i></button>
 			</div>
