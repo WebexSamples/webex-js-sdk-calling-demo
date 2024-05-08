@@ -12,7 +12,7 @@ body a {
   -ms-transition: 0.5s all;
 }
 html, body{
-    font-family: 'Oswald', sans-serif;
+    font-family: 'Poppins', sans-serif;
     font-size: 100%;
 }
 .banner{
@@ -92,7 +92,7 @@ div#bs-example-navbar-collapse-1 {
 	color:#fff;
 	font-size:1em;
 	text-decoration:none;
-	font-family: 'Pacifico', cursive;
+	font-family: 'Sofia', 'Pacifico', cursive;
 }
 /*-- top-nav --*/
 .top-nav {
@@ -127,10 +127,10 @@ ul.nav.navbar-nav {
     padding: 0;
 }
 .top-nav ul li a:hover{
-    color: #fd5c63 !important;
+    color: #5c9ffd !important;
 }
 .top-nav ul li a.active{
-    color: #fd5c63 !important;
+    color: #5c9ffd !important;
 }
 .caret {
     margin-left: 14px;
@@ -168,7 +168,7 @@ ul.nav.navbar-nav {
     color: #fff;
     font-size: 3em;
     margin: 0;
-    font-family: 'Pacifico', cursive;
+    font-family: 'Sofia', 'Pacifico', cursive;
 }
 .slider-grid p{
     color: #fff;
@@ -202,7 +202,7 @@ ul.nav.navbar-nav {
     margin: 0;
     font-size: 3em;
     color: #383838;
-	font-family: 'Pacifico', cursive;
+	font-family: 'Sofia', 'Pacifico', cursive;
 }
 .w3l-about-heading p,.codes-heading p,.w3l-contact-heading p{
 	text-align: center;
@@ -225,7 +225,7 @@ ul.nav.navbar-nav {
     color: #FFF;
     font-size: 2em;
     margin: 0;
-    font-family: 'Pacifico', cursive;
+    font-family: 'Sofia', 'Pacifico', cursive;
     line-height: 7.5em;
 }
 .about-grid-info1{
@@ -340,7 +340,7 @@ ul.nav.navbar-nav {
     margin: 0;
     font-size: 3em;
     color: #383838;
-	font-family: 'Pacifico', cursive;
+	font-family: 'Sofia', 'Pacifico', cursive;
 }
 .news-heading p {
     text-align: center;
@@ -662,7 +662,7 @@ ul.nav.navbar-nav {
     margin: 0;
     font-size: 3em;
     color: #FFF;
-    font-family: 'Pacifico', cursive;
+    font-family: 'Sofia', 'Pacifico', cursive;
 }
 .w3-different-heading p,.agileinfo-team-heading p,.more-bottom-heading p {
     text-align: center;
@@ -2709,6 +2709,7 @@ button.btn1:hover{
 
 .label.label-warning.agent-login{
 	padding: 10px 40px;
+	background-color: #f0ad4e;
 }
 
 .buttons-container {
@@ -2718,7 +2719,7 @@ button.btn1:hover{
     margin-top: -3rem;
 }
 
-.call-support-btn {
+.call-support-btn,#end-call-btn {
     background-color: #dc3545;
     color: white;
     padding: 8px 15px;
@@ -2940,7 +2941,7 @@ button.btn1:hover{
 	overflow: scroll;
 	position: fixed;
 	top: 200px;
-	left: 40px;
+	left: 20px;
 	visibility: hidden;
 	opacity: 0;
 	transition: visibility 0.3s ease, opacity 0.3s ease;
@@ -3098,4 +3099,18 @@ button.btn1:hover{
   /* Optional: Style for the icons within buttons, if using Font Awesome */
   #agent-call-window .fas {
 	margin-right: 8px; /* Add some space between the icon and the button text */
+  }
+
+  #customer-login-btn{
+	padding: 10px 40px;
+    background-color: #017cff;
+    color: #fff;
+  }
+
+  .agent-blog{
+background-color: 	#fff0db;
+  }
+  .img-icon-controls{
+	height: 1rem;
+    width: 1rem;
   }

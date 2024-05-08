@@ -86,7 +86,7 @@ function renderCallHistoryItem(call) {
           <i class="fas ${directionIcon}"></i>
         </div>
         <div class="make-call">
-            <button class="attend-call-btn"><i class="fas fa-phone"></i></button>
+            <button class="attend-call-btn"><img class="img-icon-controls" src="./images/controls/call.png"  alt=" Call Support"/></button>
         </div>
       </div>
     `;
