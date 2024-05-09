@@ -98,6 +98,25 @@ function closeCallWindow() {
     callWindowFooter.classList.remove('call-window-footer');
 }
 
+function updateBtnText(btnType) {
+    switch(btnType.innerText) {
+        case 'Mute':
+            btnType.innerText = 'Unmute';
+            break;
+        case 'Unmute':
+            btnType.innerText = 'Mute';
+            break;
+        case 'Hold':
+            btnType.innerText = 'Resume';
+            break;
+        case 'Resume':
+            btnType.innerText = 'Hold';
+            break;
+        default:
+            console.log('No case matched');
+    }
+}
+
 function renderCallHistoryItem(call) {
     const avatarInitial = 'Harvey Specter'.charAt(0).toUpperCase();
     const directionIcon = call.direction === 'OUTGOING' ? 'fa-arrow-up' : 'fa-arrow-down';
