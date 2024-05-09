@@ -1,3 +1,20 @@
+let calling;
+let callingClient;
+let correlationId;
+let callHistory;
+let line;
+let call;
+let incomingCall;
+let localAudioStream;
+
+const agentLoginBtn = document.querySelector('#agent-login-btn');
+const customerLoginBtn = document.querySelector('#customer-login-btn');
+const makeCallBtn = document.querySelector('.call-support-btn');
+const callerName = document.getElementById('caller-name');
+const callerNumber = document.getElementById('caller-number');
+const muteBtn = document.getElementById('mute-unmute-btn');
+const holdBtn = document.getElementById('hold-resume-btn');
+
 // Demo Flow 1
 // Step 1: Initialize Calling, pass calling config with relevant values to setup different clienets available in Calling SDK
 // Step 2: Fetch the calling client and fetch the lines created for the user whose access token has been shared and register the line

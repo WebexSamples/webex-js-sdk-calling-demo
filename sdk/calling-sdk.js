@@ -250,7 +250,7 @@ function disconnectCall() {
 
 function initiateConsultTransfer() {
     holdResume();
-    // Open keypad
+    openKeypad();
 }
 
 function commitConsultTransfer() {
