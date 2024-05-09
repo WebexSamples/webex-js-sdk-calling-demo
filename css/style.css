@@ -92,7 +92,7 @@ div#bs-example-navbar-collapse-1 {
 	color:#fff;
 	font-size:1em;
 	text-decoration:none;
-	font-family: 'Sofia', 'Pacifico', cursive;
+	font-family: 'roboto', 'Pacifico', cursive;
 }
 /*-- top-nav --*/
 .top-nav {
@@ -2745,17 +2745,19 @@ button.btn1:hover{
 
 .keypad-container.agent-numpad{
 	position:fixed;
-	bottom:6rem;
-	right: 6rem;
+	top: 125px;
+    right: 2px;
 	width: 17rem;
 	box-shadow: 0px 3px 5px rgba(0,0,0,0.5);
 	visibility: hidden;
 	opacity: 0;
-	transition-duration: 0.5s;
-	-moz-transition-duration: 0.5s;
+	transition-duration: 0.25s;
+	/* -moz-transition-duration: 0.5s;
 	-webkit-transition-duration: 0.5s;
 	-o-transition-duration: 0.5s;
-	-ms-transition-duration: 0.5s;
+	-ms-transition-duration: 0.5s; */
+	transition: height 0.25s ease-in;
+	
 }
 
 .keypad-container.agent-numpad.show{
@@ -2772,13 +2774,13 @@ button.btn1:hover{
 }
 
 #agent-numpad-trigger{
-	position: fixed;
+	/* position: fixed;
 	bottom: 3rem;
-	right: 3rem;
+	right: 3rem; */
 	border: 0px solid transparent;
 	border-radius: 50%;
 	box-shadow: 0px 3px 5px rgba(0,0,0,0.5);
-	width: 3rem;
+	/* width: 3rem; */
 	height: 3rem;
 	padding: 10px;
 	cursor: pointer;
@@ -2940,8 +2942,8 @@ button.btn1:hover{
 	max-height: 30rem;
 	overflow: scroll;
 	position: fixed;
-	top: 200px;
-	left: 20px;
+	top: 125px;
+    left: 0;
 	visibility: hidden;
 	opacity: 0;
 	transition: visibility 0.3s ease, opacity 0.3s ease;

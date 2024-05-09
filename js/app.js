@@ -99,7 +99,7 @@ function closeCallWindow() {
 }
 
 function renderCallHistoryItem(call) {
-    const avatarInitial = call.other.name.charAt(0).toUpperCase();
+    const avatarInitial = 'Harvey Specter'.charAt(0).toUpperCase();
     const directionIcon = call.direction === 'OUTGOING' ? 'fa-arrow-up' : 'fa-arrow-down';
     const callDate = new Date(call.startTime).toLocaleDateString();
     const callTime = new Date(call.startTime).toLocaleTimeString();
@@ -108,7 +108,7 @@ function renderCallHistoryItem(call) {
       <div class="call-history-item">
         <div class="call-avatar">${avatarInitial}</div>
         <div class="call-details">
-          <div class="call-name">${call.other.name}</div>
+          <div class="call-name">${call.other.name==='Priya Kesari'?'Harvey Specter':'Harvey Specter' }</div>
           <div class="call-phone">${call.other.phoneNumber}</div>
         </div>
         <div class="call-indicator">
@@ -116,7 +116,7 @@ function renderCallHistoryItem(call) {
           <i class="fas ${directionIcon}"></i>
         </div>
         <div class="make-call">
-            <button class="attend-call-btn"><img class="img-icon-controls" src="./images/controls/call.png"  alt=" Call Support"/></button>
+            <button class="attend-call-btn"><i class="fa fa-phone" aria-hidden="true" style="transform: rotateZ(103deg);"></i></button>
         </div>
       </div>
     `;

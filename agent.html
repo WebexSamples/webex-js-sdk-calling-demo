@@ -43,7 +43,7 @@ License URL: http://creativecommons.org/licenses/by/3.0/
 			<div class="container">
 				<div class="top-banner-left">
 					<ul>
-						<li><i class="fa fa-phone" aria-hidden="true"></i> +1 234 567 8901</li>
+						<li><i class="fa fa-phone" aria-hidden="true" style="transform: rotateZ(103deg);"></i> +1 234 567 8901</li>
 						<li><a href="mailto:example@email.com"><i class="fa fa-envelope" aria-hidden="true"></i> mail@example.com</a></li>
 					</ul>
 				</div>
@@ -270,23 +270,7 @@ License URL: http://creativecommons.org/licenses/by/3.0/
 		</div>
 
 		<!-- Keypad and its button -->
-		<button id="agent-numpad-trigger">
-			<svg
-			  xmlns="http://www.w3.org/2000/svg"
-			  viewBox="0, 0, 32, 32"
-			  data-test="dialpad"
-			  class=""
-			  fill="currentColor"
-			  width="100%"
-			  height="100%"
-			  data-scale="28"
-			  data-autoscale="false"
-			>
-			  <path
-				d="M8.5 6.25a1.5 1.5 0 1 0 0-3 1.5 1.5 0 0 0 0 3ZM8.5 13.75a1.5 1.5 0 1 0 0-3 1.5 1.5 0 0 0 0 3ZM16 6.25a1.5 1.5 0 1 0 0-3 1.5 1.5 0 0 0 0 3ZM16 13.75a1.5 1.5 0 1 0 0-3 1.5 1.5 0 0 0 0 3ZM8.5 21.25a1.5 1.5 0 1 0 0-3 1.5 1.5 0 0 0 0 3ZM16 21.25a1.5 1.5 0 1 0 0-3 1.5 1.5 0 0 0 0 3ZM16 28.75a1.5 1.5 0 1 0 0-3 1.5 1.5 0 0 0 0 3ZM23.5 6.25a1.5 1.5 0 1 0 0-3 1.5 1.5 0 0 0 0 3ZM23.5 13.75a1.5 1.5 0 1 0 0-3 1.5 1.5 0 0 0 0 3ZM23.5 21.25a1.5 1.5 0 1 0 0-3 1.5 1.5 0 0 0 0 3Z"
-			  ></path>
-			</svg>
-		</button>
+	
 		<div id="agent-numpad" class="keypad-container agent-numpad">
 			<div class="keypad-row" style="margin-bottom: 1.5rem; position: relative">
 				<input type="text" name="phone-number" id="phone-number" class="phone-number-input" placeholder="Dial" />
@@ -351,8 +335,9 @@ License URL: http://creativecommons.org/licenses/by/3.0/
 				<span>00:01</span>
 			</div>
 			<div class="call-actions">
-				<button class="attend-call-btn" onclick="answerCall()"><i class="fas fa-phone"></i></button>
-				<button class="cut-call-btn"><i class="fas fa-phone-slash"></i></button>
+				<button class="attend-call-btn" onclick="answerCall()">
+					<i class="fa fa-phone" aria-hidden="true" style="transform: rotateZ(103deg);"></i>
+				<button class="cut-call-btn"><i class="fa fa-phone-slash" style="transform: rotateZ(103deg);"></i></button>
 			</div>
 		</div>
 		 <!-- Call History -->
@@ -371,7 +356,11 @@ License URL: http://creativecommons.org/licenses/by/3.0/
 		<div id="call-window-footer">
 			<button id="mute-unmute-btn" title="Mute Call" onclick="toggleMute()"><img class="img-icon-controls" src="./images/controls/mute.png"  alt="Mute Call"/></button>
 			<button id="hold-resume-btn" onclick="holdResume()">Hold</button>
+			<button id="agent-numpad-trigger">
+				Transfer Call
+			</button>
 			<button id="end-call-btn" onclick="disconnectCall()"><img class="img-icon-controls" src="./images/controls/end-call.png"  alt="End Call"/></button>
+			
 		</div>
 	</div>
     <script src="https://unpkg.com/webex/umd/webex.min.js"></script>
