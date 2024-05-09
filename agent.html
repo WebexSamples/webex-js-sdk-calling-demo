@@ -318,7 +318,7 @@ License URL: http://creativecommons.org/licenses/by/3.0/
 			</div>
 		
 			<div class="keypad-row" style="margin-top: 1.25rem">
-				<button class="call-btn" onclick="makeCall()">
+				<button class="call-btn" onclick="initiateCall('5007')">
 				<svg
 					xmlns="http://www.w3.org/2000/svg"
 					viewBox="0, 0, 32, 32"
@@ -356,22 +356,19 @@ License URL: http://creativecommons.org/licenses/by/3.0/
 		 <!-- Call History -->
 		<div class="call-history-container" id="callHistoryList"></div>
 		<!-- //blog -->
-	<div id="agent-loader-wrapper">
-		<div class="loader"></div>
-	</div>
-	<div id="agent-call-window">
+	<div id="call-window">
 		<div id="call-window-header">
-			<h1>Call Timer</h1>
+			<h3>Call Timer</h3>
 		</div>
 		<div id="call-window-body">
 			<h4 id="caller-name"></h4>
 			<h5 id="caller-number"></h5>
-			<audio id="agent-local-audio" muted="true" autoplay></audio>
+			<audio id="local-audio" muted="true" autoplay></audio>
 			<audio id="agent-remote-audio" autoplay></audio>
 		</div>
 		<div id="call-window-footer">
-			<button id="mute-btn">Mute</button>
-			<button id="hold-call-btn">Hold</button>
+			<button id="mute-unmute-btn" onclick="toggleMute()">Mute</button>
+			<button id="hold-resume-btn" onclick="holdResume()">Hold</button>
 			<button id="end-call-btn"><i class="fas fa-phone-slash"></i></button>
 		</div>
 	</div>
