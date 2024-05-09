@@ -369,9 +369,9 @@ License URL: http://creativecommons.org/licenses/by/3.0/
 			<audio id="agent-remote-audio" autoplay></audio>
 		</div>
 		<div id="call-window-footer">
-			<button id="mute-btn" title="Mute Call"><img class="img-icon-controls" src="./images/controls/mute.png"  alt="Mute Call"/></button>
-			<button id="hold-call-btn">Hold</button>
-			<button id="end-call-btn"><img class="img-icon-controls" src="./images/controls/end-call.png"  alt="End Call"/></button>
+			<button id="mute-unmute-btn" title="Mute Call" onclick=""><img class="img-icon-controls" src="./images/controls/mute.png"  alt="Mute Call"/></button>
+			<button id="hold-resume-btn" onclick="holdResume()">Hold</button>
+			<button id="end-call-btn" onclick="disconnectCall()"><img class="img-icon-controls" src="./images/controls/end-call.png"  alt="End Call"/></button>
 		</div>
 	</div>
     <script src="https://unpkg.com/webex/umd/webex.min.js"></script>
