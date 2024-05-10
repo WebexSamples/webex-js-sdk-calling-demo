@@ -45,13 +45,15 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
 					</ul>
 				</div>
 				<div class="top-banner-right">
-					<ul>
-						<li><a class="facebook" href="#"><i class="fa fa-facebook" aria-hidden="true"></i></a></li>
-						<li><a class="facebook" href="#"><i class="fa fa-twitter" aria-hidden="true"></i></a></li>
-						<li><a class="facebook" href="#"><i class="fa fa-dribbble" aria-hidden="true"></i></a></li>
-						<li><a class="facebook" href="#"><i class="fa fa-google-plus" aria-hidden="true"></i></a></li>
-						<button class="label label-warning customer-login" id="customer-login-btn" onclick="initCalling('customer')">Signin</button>
-					</ul>
+					<button class="dropbtn">
+						<img src="images/harvey_avatar.jpeg" alt="Avatar" class="avatar">
+						<span class="avatar-name">Harvey</span>
+						<i class="fa fa-caret-down"></i>
+					</button>
+					<div class="dropdown-content" id="myDropdown">
+						<a href="mytrips.html"><i class="fa fa-plane-departure"></i> My Trips</a>
+						<a href="#"><i class="fa fa-sign-out-alt"></i> Logout</a>
+					</div>
 				</div>
 				<div class="clearfix"> </div>
 			</div>
@@ -213,7 +215,7 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
 		<div id="call-window" class="call-window hidden">
 			<div id="call-section" class="call-section">
 				<div id="call-window-header">
-					<h1>Call Timer</h1>
+					<h1>00:00</h1>
 				</div>
 				<div id="call-window-body" class="call-window-body">
 					<h4 id="caller-name"></h4>
@@ -228,7 +230,13 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
 		</div>
 	<script src="https://unpkg.com/webex/umd/webex.min.js"></script>
 	<script src='https://unpkg.com/webex@2.60.0-next.2/umd/calling.min.js'></script>
+	<script type="text/javascript" src="./js/timer.js"></script>
 	<script type="text/javascript" src="./js/app.js"></script>
 	<script type="text/javascript" src="./sdk/calling-sdk.js"></script>
+	<script type="text/javascript">
+		window.onload = () => {
+			initCalling('customer');
+		}
+	</script>
 </body>	
 </html>

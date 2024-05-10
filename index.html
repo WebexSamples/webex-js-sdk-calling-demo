@@ -29,6 +29,8 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
 <!-- //font -->
 <script src="js/jquery-1.11.1.min.js"></script>
 <script src="js/bootstrap.js"></script>
+<!-- //parallax -->
+<link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.15.4/css/all.css">
 </head>
 <body>
 	<!-- banner -->
@@ -42,13 +44,15 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
 					</ul>
 				</div>
 				<div class="top-banner-right">
-					<ul>
-						<li><a class="facebook" href="#"><i class="fa fa-facebook" aria-hidden="true"></i></a></li>
-						<li><a class="facebook" href="#"><i class="fa fa-twitter" aria-hidden="true"></i></a></li>
-						<li><a class="facebook" href="#"><i class="fa fa-dribbble" aria-hidden="true"></i></a></li>
-						<li><a class="facebook" href="#"><i class="fa fa-google-plus" aria-hidden="true"></i></a></li>
-						<button class="label label-warning customer-login" id="customer-login-btn" onclick="initCalling('customer')">Signin</button>
-					</ul>
+					<button class="dropbtn">
+						<img src="images/harvey_avatar.jpeg" alt="Avatar" class="avatar">
+						<span class="avatar-name">Harvey</span>
+						<i class="fa fa-caret-down"></i>
+					</button>
+					<div class="dropdown-content" id="myDropdown">
+						<a href="mytrips.html"><i class="fa fa-plane-departure"></i> My Trips</a>
+						<a href="#"><i class="fa fa-sign-out-alt"></i> Logout</a>
+					</div>
 				</div>
 				<div class="clearfix"> </div>
 			</div>
@@ -164,6 +168,7 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
 	<script src="js/SmoothScroll.min.js"></script>
 	<script src="https://unpkg.com/webex/umd/webex.min.js"></script>
 	<script src='https://unpkg.com/webex@2.60.0-next.2/umd/calling.min.js'></script>
-	<script type="text/javascript" src="./js/calling-sdk.js"></script>
+	<script type="text/javascript" src="./js/timer.js"></script>
+	<script type="text/javascript" src="./js/app.js"></script>
 </body>	
 </html>

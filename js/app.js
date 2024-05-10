@@ -2,6 +2,10 @@ let agentNumpad;
 const callNotification = document.getElementById('callNotification');
 const callTime = document.getElementById('call-time');
 const callWindow = document.getElementById('call-window');
+const callWindowHeader = document.getElementById('call-window-header');
+const callWindowHeaderH1 = callWindowHeader.querySelector('h1');
+const callWindowHeaderTimer = new Timer(callWindowHeaderH1);
+
 const callerName = document.getElementById('caller-name');
 const callerNumber = document.getElementById('caller-number');
 const holdStatus = document.getElementById('hold-status');
@@ -9,6 +13,8 @@ const transferSection = document.getElementById('transfer-section');
 const transferName = document.getElementById('transfer-name');
 const transferNumber = document.getElementById('transfer-number');
 const transferBtn = document.getElementById('agent-numpad-trigger');
+
+const profileDropDown = document.getElementById("myDropdown");
 
 let timer = {
     minutes: 0,
@@ -38,23 +44,27 @@ let timer = {
     },
 }
 
-callNotification.__proto__.toggle = () => {
-    if(callNotification.classList.contains('show-notification')){
-        callNotification.classList.remove('show-notification');
-        setTimeout(() => { 
-            callNotification.classList.remove('timestate');
-            timer.stop();
-        }, 2500);
+if(callNotification){
+    const callNotificationTimer = new Timer(callTime);
+    callNotification.__proto__.toggle = () => {
+        if(callNotification.classList.contains('show-notification')){
+            callNotification.classList.remove('show-notification');
+            setTimeout(() => { 
+                callNotification.classList.remove('timestate');
+                timer.stop();
+            }, 2500);
+        }
+        else{
+            callNotification.classList.add('show-notification');
+        }
+        return callNotificationTimer;
     }
-    else{
-        callNotification.classList.add('show-notification');
-    }
-    return timer;
-}
 
-callNotification.__proto__.startTimer = () => {
-    callNotification.classList.contains('timestate') ? callNotification.classList.remove('timestate') : callNotification.classList.add('timestate');
-    timer.start();
+    callNotification.__proto__.startTimer = () => {
+        callNotification.classList.contains('timestate') ? callNotification.classList.remove('timestate') : callNotification.classList.add('timestate');
+        callNotificationTimer.start();
+        return callNotificationTimer;
+    }
 }
 
 function openKeypad() {
@@ -77,7 +87,6 @@ function getAccessToken(userType) {
     let access_token;
     if (userType === 'customer') {
         access_token = 'OGY4OTgzOGUtNGUzNS00MmQ5LWJkNTEtMDUyODBmMTBhY2U0NTNkM2Q2ODQtZjAx_P0A1_b657fcf3-6b06-46a4-ab0e-f23fceb7a447';
-        customerLoginBtn.remove();
     } else {
         access_token = 'NTRjMmFmYmQtOTJmNi00NTQ4LWI5ZDMtZDU4YjRjY2Q1Nzk2MjIxOThkMzktOTAx_P0A1_b657fcf3-6b06-46a4-ab0e-f23fceb7a447';
     }
@@ -165,4 +174,19 @@ function renderCallHistory(callHistoryData) {
     let callHistoryHTML = callHistoryData.map(renderCallHistoryItem).join('');
     callHistoryList.innerHTML = callHistoryHTMLHeader+callHistoryHTML;
     callHistoryList.classList.add('show-history');
+}
+
+document.querySelector('.dropbtn').addEventListener('click', (event) => {
+    if (profileDropDown.classList.contains('show')) {
+        profileDropDown.classList.remove('show');
+    }
+    else{
+        profileDropDown.classList.add('show');
+    }
+    event.stopPropagation();
+});
+  
+  // Close the dropdown menu if the user clicks outside of it
+window.onclick = () => {
+    profileDropDown.classList.remove('show');
 }

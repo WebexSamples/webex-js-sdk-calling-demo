@@ -194,7 +194,7 @@ async function initiateCall(number) {
         });
     
         call.on('connect', (correlationId) => {
-            // start the timer
+            callWindowHeaderTimer.start();
         });
     
         call.on('remote_media', (track) => {
