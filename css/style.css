@@ -2731,12 +2731,16 @@ button.btn1:hover{
     cursor: pointer;
 }
 
+.call-support-btn {
+	background-color: #28a745;
+
+}
 .call-support-btn i {
     margin-right: 5px; /* Space between the icon and text */
 }
 
 .call-support-btn:hover {
-    background-color: #c82333;
+    background-color: #1eb642;
 }
 
 .hider-harveyspecter{
@@ -2774,13 +2778,8 @@ button.btn1:hover{
 }
 
 #agent-numpad-trigger{
-	/* position: fixed;
-	bottom: 3rem;
-	right: 3rem; */
 	border: 0px solid transparent;
-	border-radius: 50%;
 	box-shadow: 0px 3px 5px rgba(0,0,0,0.5);
-	/* width: 3rem; */
 	height: 3rem;
 	padding: 10px;
 	cursor: pointer;
