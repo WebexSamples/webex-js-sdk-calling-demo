@@ -11,8 +11,6 @@ let localAudioStream;
 const agentLoginBtn = document.querySelector('#agent-login-btn');
 const customerLoginBtn = document.querySelector('#customer-login-btn');
 const makeCallBtn = document.querySelector('.call-support-btn');
-const callerName = document.getElementById('caller-name');
-const callerNumber = document.getElementById('caller-number');
 const muteBtn = document.getElementById('mute-unmute-btn');
 const holdBtn = document.getElementById('hold-resume-btn');
 
@@ -188,11 +186,7 @@ async function initiateCall(number) {
         });
     
         call.on('caller_id', (CallerIdEmitter) => {
-            console.log(
-                `callerId : Name: ${CallerIdEmitter.callerId.name}, Number: ${CallerIdEmitter.callerId.num}, Avatar: ${CallerIdEmitter.callerId.avatarSrc}, UserId: ${CallerIdEmitter.callerId.id}`
-            );
-            callerName.innerText = 'Benjamin';
-            callerNumber.innerText = CallerIdEmitter.callerId.num;
+            updateCallerId(CallerIdEmitter);
         });
     
         call.on('progress', (correlationId) => {
@@ -221,6 +215,7 @@ async function initiateCall(number) {
 async function answerCall () {
     try {
         callNotification.toggle();
+        swapDivs();
         openCallWindow();
         await getMediaStreams();
 
@@ -267,13 +262,12 @@ function disconnectCall() {
 // Demo Flow 2
 // STEP 1-6 are the same.
 // Step 7: Initiate the call transfer by putting the existing call on hold and initiating new call with transfer target
-function initiateTransfer () {
-
+function initiateTransfer() {
+    holdResume();
+    openKeypad();
 }
 
-
-// Finished the consult transfer by connecting the caller with the transfer target
+// Finish the consult transfer by connecting the caller with the transfer target
 function commitConsultTransfer() {
-
+    incomingCall.completeTransfer('CONSULT', call.getCallId(), undefined);
 }
-

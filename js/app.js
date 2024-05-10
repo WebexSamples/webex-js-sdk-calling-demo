@@ -8,6 +8,7 @@ const holdStatus = document.getElementById('hold-status');
 const transferSection = document.getElementById('transfer-section');
 const transferName = document.getElementById('transfer-name');
 const transferNumber = document.getElementById('transfer-number');
+const transferBtn = document.getElementById('agent-numpad-trigger');
 
 let timer = {
     minutes: 0,
@@ -87,6 +88,9 @@ function getAccessToken(userType) {
 function openCallWindow(num) {
     if (num === '5007') {
         holdStatus.innerText = 'On hold'
+        muteBtn.remove();
+        transferBtn.remove();
+        agentNumpad.classList.add('hidden');
         transferSection.classList.remove('hidden');
     } else {
         callWindow.classList.remove('hidden');

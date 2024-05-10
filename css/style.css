@@ -3035,15 +3035,14 @@ button.btn1:hover{
 	flex-direction: row;
 	position: fixed;
 	z-index: 10;
-	width: 60%; 
+	width: 50%; 
 	height: 50%;
 	top: 38%;
-	left: 20%;
+	left: 25%;
 	border-radius: 8px;
 	box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
 	background-color: white;
 	justify-content: center;
-	align-items: center;
 }
 
 .call-section, .transfer-section {

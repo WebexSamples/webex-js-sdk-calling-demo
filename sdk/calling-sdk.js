@@ -177,7 +177,7 @@ async function getMediaStreams() {
 
 // Trigger an outbound call
 async function initiateCall(number) {
-   
+   try {
         const destination = {
             value: number
         };
@@ -211,9 +211,9 @@ async function initiateCall(number) {
         });
     
         call.dial(localAudioStream);
-    // } catch (err) {
-    //     console.log("DEMO: Failed in initiating call");
-    // }
+    } catch (err) {
+        console.log("DEMO: Failed in initiating call");
+    }
 }
 
 async function answerCall() {
