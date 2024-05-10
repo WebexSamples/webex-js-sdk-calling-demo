@@ -3030,11 +3030,7 @@ button.btn1:hover{
 	display: none;
 }
 
-#call-window{
-	display: none;
-}
-
-#call-window.call-window {
+.call-window {
 	display: flex;
 	flex-direction: row;
 	position: fixed;

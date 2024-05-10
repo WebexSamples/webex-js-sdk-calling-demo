@@ -1,7 +1,7 @@
 let agentNumpad;
 const callNotification = document.getElementById('callNotification');
 const callTime = document.getElementById('call-time');
-
+const callWindow = document.getElementById('call-window');
 const callWindowHeader = document.getElementById('call-window-header');
 const callWindowHeaderH1 = callWindowHeader.querySelector('h1');
 const callWindowHeaderTimer = new Timer(callWindowHeaderH1);
@@ -106,11 +106,19 @@ function openCallWindow(num) {
     }
 }
 
-function closeCallWindow() {
-    callWindow.classList.remove('call-window');
-    callWindowHeader.classList.remove('call-window-header');
-    callWindowBody.classList.remove('call-window-body');
-    callWindowFooter.classList.remove('call-window-footer');
+function closeCallWindow() {   
+    callWindow.classList.add('hidden');
+    transferSection.classList.remove('hidden');
+}
+
+function updateCallerId(CallerIdEmitter) {
+    if (CallerIdEmitter.callerId.name === 'Priya Kesari') {
+        transferName.innerText = 'Jane Doe';
+        transferNumber.innerText = '5007';
+    } else {
+        callerName.innerText = 'Benjamin';
+        callerNumber.innerText = CallerIdEmitter.callerId.num;
+    }
 }
 
 function updateBtnText(btnType) {
