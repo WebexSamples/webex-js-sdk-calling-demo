@@ -10,7 +10,6 @@ let incomingCall;
 let localAudioStream;
 
 const agentLoginBtn = document.querySelector('#agent-login-btn');
-const customerLoginBtn = document.querySelector('#customer-login-btn');
 const makeCallBtn = document.querySelector('.call-support-btn');
 const muteBtn = document.getElementById('mute-unmute-btn');
 const holdBtn = document.getElementById('hold-resume-btn');
@@ -263,6 +262,7 @@ function holdResume() {
 function disconnectCall() {
     try {
         call.end();
+        callWindowHeaderTimer.stop();
         closeCallWindow();
     } catch (err) {
         console.log("DEMO: failed to disconnect the call");
