@@ -3026,9 +3026,13 @@ button.btn1:hover{
 	font-size: 12px;
 }
 
+.hidden {
+	display: none;
+}
+
 .call-window {
 	display: flex;
-	flex-direction: column;
+	flex-direction: row;
 	position: fixed;
 	z-index: 10;
 	width: 60%; 
@@ -3042,20 +3046,32 @@ button.btn1:hover{
 	align-items: center;
 }
 
-.call-window-header {
+.call-section, .transfer-section {
+    flex: 1; /* Each section takes up equal width */
+    display: flex;
+    flex-direction: column; /* Align children vertically */
+	height: 100%;
+}
+
+.transfer-section .hidden {
+	display: none; /* When hidden, the transfer section takes up no space */
+	flex: 0; /* It also doesn't grow to take up space */
+  }
+
+.call-window-header .transfer-window-header {
 	padding: 10px;
 	border-top-left-radius: 8px; /* Continue the border-radius from the call window */
 	border-top-right-radius: 8px;
 	/* Additional header styles if needed */
   }
   
-.call-window-body {
+.call-window-body .transfer-window-body {
 	flex-grow: 1; /* Allow the body to grow and fill available space */
 	padding: 10px;
 	/* Additional body styles if needed */
   }
 
-.call-window-footer {
+.call-window-footer .transfer-window-footer{
 	position: absolute;
 	bottom: 0; /* Align the footer to the bottom of the call window */
 	left: 0;
@@ -3071,7 +3087,7 @@ button.btn1:hover{
   }
   
   /* General style for the buttons */
-  #call-window button {
+  .call-window button {
 	padding: 10px 20px; /* Add some padding around the button text */
 	margin: 0 5px; /* Add some margin between buttons */
 	border: none; /* Remove default border */
@@ -3084,7 +3100,7 @@ button.btn1:hover{
   }
   
   /* Hover effect for buttons */
-  #call-window button:hover {
+  .call-window button:hover {
 	background-color: #0056b3; /* Darken the button color on hover */
   }
   
@@ -3098,7 +3114,7 @@ button.btn1:hover{
   }
   
   /* Optional: Style for the icons within buttons, if using Font Awesome */
-  #call-window .fas {
+  .call-window .fas {
 	margin-right: 8px; /* Add some space between the icon and the button text */
   }
 
@@ -3110,6 +3126,10 @@ button.btn1:hover{
 	text-align: center;
   }
 
+  h6 {
+	text-align: center;
+  }
+
   #customer-login-btn{
 	padding: 10px 40px;
     background-color: #017cff;
@@ -3117,7 +3137,8 @@ button.btn1:hover{
   }
 
   .agent-blog{
-background-color: 	#fff0db;
+	background-color: 	#fff0db;
+	
   }
   .img-icon-controls{
 	height: 1rem;

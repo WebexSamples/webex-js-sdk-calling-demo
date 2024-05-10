@@ -12,8 +12,6 @@ let localAudioStream;
 const agentLoginBtn = document.querySelector('#agent-login-btn');
 const customerLoginBtn = document.querySelector('#customer-login-btn');
 const makeCallBtn = document.querySelector('.call-support-btn');
-const callerName = document.getElementById('caller-name');
-const callerNumber = document.getElementById('caller-number');
 const muteBtn = document.getElementById('mute-unmute-btn');
 const holdBtn = document.getElementById('hold-resume-btn');
 
@@ -179,11 +177,11 @@ async function getMediaStreams() {
 
 // Trigger an outbound call
 async function initiateCall(number) {
-    try {
+   
         const destination = {
             value: number
         };
-        openCallWindow();
+        openCallWindow(number);
         await getMediaStreams();
     
         // Create call object
@@ -193,11 +191,7 @@ async function initiateCall(number) {
         });
     
         call.on('caller_id', (CallerIdEmitter) => {
-            console.log(
-                `callerId : Name: ${CallerIdEmitter.callerId.name}, Number: ${CallerIdEmitter.callerId.num}, Avatar: ${CallerIdEmitter.callerId.avatarSrc}, UserId: ${CallerIdEmitter.callerId.id}`
-            );
-            callerName.innerText = 'Benjamin';
-            callerNumber.innerText = CallerIdEmitter.callerId.num;
+           updateCallerId(CallerIdEmitter);
         });
     
         call.on('progress', (correlationId) => {
@@ -217,14 +211,15 @@ async function initiateCall(number) {
         });
     
         call.dial(localAudioStream);
-    } catch (err) {
-        console.log("DEMO: Failed in initiating call");
-    }
+    // } catch (err) {
+    //     console.log("DEMO: Failed in initiating call");
+    // }
 }
 
 async function answerCall() {
     try {
         callNotification.toggle();
+        swapDivs();
         openCallWindow();
         await getMediaStreams();
 
@@ -276,12 +271,12 @@ function disconnectCall() {
 
 
 // Initiate call transfer, puts the existing call on hold and initiates new call with transfer target
-function initiateConsultTransfer() {
+function initiateTransfer() {
     holdResume();
     openKeypad();
 }
 
 // Finished the consult transfer by connecting the caller with the transfer target
 function commitConsultTransfer() {
-    call.completeTransfer(incomingCall.correlationId);
+    incomingCall.completeTransfer('CONSULT', call.getCallId(), undefined);
 }

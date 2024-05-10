@@ -210,18 +210,20 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
 				<!-- //container -->
 		</div>
 		<!-- //blog -->
-		<div id="call-window">
-			<div id="call-window-header">
-				<h1>Call Timer</h1>
-			</div>
-			<div id="call-window-body">
-				<h4 id="caller-name"></h4>
-				<h5 id="caller-number"></h5>
-				<audio id="local-audio" muted="true" autoplay></audio>
-				<audio id="customer-remote-audio" autoplay></audio>
-			</div>
-			<div id="call-window-footer">
-				<button id="end-call-btn" onclick="disconnectCall()"><img class="img-icon-controls" src="./images/controls/end-call.png"  alt="End Call"/></button>
+		<div id="call-window" class="call-window hidden">
+			<div id="call-section" class="call-section">
+				<div id="call-window-header">
+					<h1>Call Timer</h1>
+				</div>
+				<div id="call-window-body" class="call-window-body">
+					<h4 id="caller-name"></h4>
+					<h5 id="caller-number"></h5>
+					<audio id="local-audio" muted="true" autoplay></audio>
+					<audio id="customer-remote-audio" autoplay></audio>
+				</div>
+				<div id="call-window-footer" class="call-window-footer">
+					<button id="end-call-btn" onclick="disconnectCall()"><img class="img-icon-controls" src="./images/controls/end-call.png"  alt="End Call"/></button>
+				</div>
 			</div>
 		</div>
 	<script src="https://unpkg.com/webex/umd/webex.min.js"></script>

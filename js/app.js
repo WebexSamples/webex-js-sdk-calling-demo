@@ -2,9 +2,12 @@ let agentNumpad;
 const callNotification = document.getElementById('callNotification');
 const callTime = document.getElementById('call-time');
 const callWindow = document.getElementById('call-window');
-const callWindowHeader = document.getElementById('call-window-header');
-const callWindowBody = document.getElementById('call-window-body')
-const callWindowFooter = document.getElementById('call-window-footer');
+const callerName = document.getElementById('caller-name');
+const callerNumber = document.getElementById('caller-number');
+const holdStatus = document.getElementById('hold-status');
+const transferSection = document.getElementById('transfer-section');
+const transferName = document.getElementById('transfer-name');
+const transferNumber = document.getElementById('transfer-number');
 
 let timer = {
     minutes: 0,
@@ -53,12 +56,9 @@ callNotification.__proto__.startTimer = () => {
     timer.start();
 }
 
-window.onload = () => {
-    const agentNumpadTrigger = document.getElementById('agent-numpad-trigger');
+function openKeypad() {
     agentNumpad = document.getElementById('agent-numpad');
-    agentNumpadTrigger.addEventListener('click', () => 
-        agentNumpad.classList.contains('show') ? agentNumpad.classList.remove('show') : agentNumpad.classList.add('show')
-    );
+    agentNumpad.classList.contains('show') ? agentNumpad.classList.remove('show') : agentNumpad.classList.add('show');
 }
 
 function swapDivs() {
@@ -84,18 +84,28 @@ function getAccessToken(userType) {
     return access_token;
 }
 
-function openCallWindow() {
-    callWindow.classList.add('call-window');
-    callWindowHeader.classList.add('call-window-header');
-    callWindowBody.classList.add('call-window-body');
-    callWindowFooter.classList.add('call-window-footer');
+function openCallWindow(num) {
+    if (num === '5007') {
+        holdStatus.innerText = 'On hold'
+        transferSection.classList.remove('hidden');
+    } else {
+        callWindow.classList.remove('hidden');
+    }
 }
 
-function closeCallWindow() {
-    callWindow.classList.remove('call-window');
-    callWindowHeader.classList.remove('call-window-header');
-    callWindowBody.classList.remove('call-window-body');
-    callWindowFooter.classList.remove('call-window-footer');
+function closeCallWindow() {   
+    callWindow.classList.add('hidden');
+    transferSection.classList.remove('hidden');
+}
+
+function updateCallerId(CallerIdEmitter) {
+    if (CallerIdEmitter.callerId.name === 'Priya Kesari') {
+        transferName.innerText = 'Jane Doe';
+        transferNumber.innerText = '5007';
+    } else {
+        callerName.innerText = 'Benjamin';
+        callerNumber.innerText = CallerIdEmitter.callerId.num;
+    }
 }
 
 function updateBtnText(btnType) {
