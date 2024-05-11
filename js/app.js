@@ -67,11 +67,6 @@ if(callNotification){
     }
 }
 
-function openKeypad() {
-    agentNumpad = document.getElementById('agent-numpad');
-    agentNumpad.classList.contains('show') ? agentNumpad.classList.remove('show') : agentNumpad.classList.add('show');
-}
-
 function swapDivs() {
     var mikeross = document.getElementsByClassName('hider-mikeross');
     var harveyspecter = document.getElementsByClassName('hider-harveyspecter');
@@ -83,15 +78,69 @@ function swapDivs() {
     }
 }
 
-function getAccessToken(userType) {
+function getWebexConfig(userType) {
     let access_token;
     if (userType === 'customer') {
-        access_token = 'OGY4OTgzOGUtNGUzNS00MmQ5LWJkNTEtMDUyODBmMTBhY2U0NTNkM2Q2ODQtZjAx_P0A1_b657fcf3-6b06-46a4-ab0e-f23fceb7a447';
+        access_token = "eyJhbGciOiJSUzI1NiJ9.eyJjbHVzdGVyIjoiUDBBMSIsInByaXZhdGUiOiJleUpqZEhraU9pSktWMVFpTENKbGJtTWlPaUpCTVRJNFEwSkRMVWhUTWpVMklpd2lZV3huSWpvaVpHbHlJbjAuLjVCWVh3VzUzQUwwMVFLQkNyMXNuS1EuRjYxbGNLRG9ma0ItNkxRNWNOSEM3ZkswWHB0NEJ1N19yYVByOFFHSzM2ZUVKbVJWSTlSSTJJU0htMWVPLWtEek54cVNFdFJMdTBIek9HM3MwV3ViZFRYTGdUSXA4aHBlWVRlOWtid3BONzEwbURzRllJWTJURXhBYXU5OTBrZDdheTlCUFpOUk16OHJEeWFtMW1TbDRNNnM5eXFKM1VlbGxBbjFscUp2YkVhUU94UmRpeEhUbFNPVExYekg3dGZYbTFjM1NtRS1sbkk4ZGFZZzVZd1NQQ0Z6SnpIMU03TkhodXhBR3V6c19naEFNZ3BMdUE5eHptQmNyU2lKWGZOQ2xsLXN3Z0c2bkpnc1BGM0QtM2Y3ai1WMmlhc0RHSGZxS2pxM2RuT25GdHJjRUtDRDlLaXgtY3lTX0xTMmVsXzRuR3BZeHMxTVZhbWlFNEFKZk1mU2F5N2lGcl83V3FPcktDbUFsLWlBdkRFRU9JdUx5ZlNUVlZfbHlmdW84anZVVXh3Vmd6OE9kYVVFb3EtTUI5WGFtdWNPdGVHTmd6YnROaldMS1AxMTZ5NlNYUHNISGpWRkRrUGRDM1BvS2t0SEVPYmw0dHlOSU54am5VTllnLTd6RlpEb2hIcEpLQzBNeTNlMzJZblRrNHdfUVU2SktqVHJxS3dWdURPcTZFb1dOSnNJQi1rUDJQcDFvWWdqak1pd2RzaXhYTGhURF8zMjVDLXYwT1diaF95cmxaOWZWVzdZTWFydWNtMkhJNUNRcE5OUV9OajFhbVBzZ0NqSFFrekNoMEw5NThuYU9IbVJkNF8zakd3WlZQc01MaHptVVFzMkVOel9uZUNtOVIzejVJelVrN0ZoQm96UEdYWWZscjQ4X25hSjJQa2p1UzhkQWNUcXdHcEdDNUNmeXNmelFEbGM4OHNFaWZLbDkwRzBXYzZJeGN3bkREdGFlU1RyU1Jjem9ZUE92aDVwYlRlSl9Dc09iRVNHLWRhX0xzUVBjV29NcjNERmVBUjVIeUNxeGR2QUJKdGdTamFGVkpRTXZrVjhoWk5weWNrSHpOcF9xZkwwZkE2U0xFZy5XWTE4R3FwVFMtZWQxdTQ2UWMzX3ZBIiwidXNlcl90eXBlIjoidXNlciIsInRva2VuX2lkIjoiQWFaM3IwTW1Oa1kyUXhZV1F0TkRNek5DMDBNalV6TFRrd05qSXROMkUxWXpWaU5qbGhOMlZtWVRNNU1tSTFaak10T1RVeSIsInJlZmVyZW5jZV9pZCI6IjVhZTVkNjlkLWNlYTMtNDhmNy05MzhhLTRjZmE2YjNhMTkwMyIsImlzcyI6Imh0dHBzOlwvXC9pZGJyb2tlci1iLXVzLndlYmV4LmNvbVwvaWRiIiwidXNlcl9tb2RpZnlfdGltZXN0YW1wIjoiMjAyMzA1MjYwNzQ2MDAuMTY5WiIsInJlYWxtIjoiYjY1N2ZjZjMtNmIwNi00NmE0LWFiMGUtZjIzZmNlYjdhNDQ3IiwiY2lzX3V1aWQiOiJiNzJiY2FmNi0zZjMwLTQ3YmEtODAzOC0zMzhkOGQwZTU3NzIiLCJ0b2tlbl90eXBlIjoiQmVhcmVyIiwiZXhwaXJ5X3RpbWUiOjE3MTU1MDkzNjc4OTQsImNsaWVudF9pZCI6IkM2NGFiMDQ2MzllZWZlZTQ3OThmNThlN2JjM2ZlMDFkNDcxNjFiZTBkOTdmZjBkMzFlMDQwYTZmZmU2NmQ3ZjBhIn0.SXbrvv69e15Xdcrv2Mzn0pidc55AZsIGJCdbcJAZTKlB2BA9Q4FIDVu1I2gObcfEh0A4bSzJaR4RmLQIXHWLxB17gsp6G29IuP-HnaLA_IQXG-cPhE8HP2zjUJ08nvVTl-A2MTF7z4iy3_dOT4qLafgQEPTzdTBdmkJ30jZ6rNPrk2bcFCiom1ycscvS0yrE_QM_oWmsDrZoy-qvLB248Uzm8xh_7KqR_zC3qwpsJii4KTvPWO40lrRzl77bNvK_qvg9vePoNnPYoQcZnVIbveWrD4WEE-Z8DefsQMZVtah1d8do9a5P6IZIhKfESOm4aB0x8jzQkJQ_5GPbjnrq8g";
     } else {
         access_token = 'NTRjMmFmYmQtOTJmNi00NTQ4LWI5ZDMtZDU4YjRjY2Q1Nzk2MjIxOThkMzktOTAx_P0A1_b657fcf3-6b06-46a4-ab0e-f23fceb7a447';
     }
 
-    return access_token;
+    const webexConfig = {
+        config: {
+            logger: {
+                level: 'debug', // set the desired log level
+            },
+            meetings: {
+                reconnection: {
+                    enabled: true,
+                },
+                enableRtx: true,
+            },
+            encryption: {
+                kmsInitialTimeout: 8000,
+                kmsMaxTimeout: 40000,
+                batcherMaxCalls: 30,
+                caroots: null,
+            },
+            dss: {},
+        },
+        credentials: {
+            access_token: access_token
+        }
+    };
+
+    return webexConfig;
+}
+
+function getCallingConfig() {
+    const clientConfig = {
+        calling: true,
+        callHistory: true,
+    }
+
+    const loggerConfig = {
+        level: 'info'
+    }
+
+    const serviceData = {indicator: 'calling', domain: ''};
+
+    const callingClientConfig = {
+        logger: loggerConfig,
+        discovery: {
+            region: '',
+            country: '',
+        },
+        serviceData,
+    };
+
+    const callingConfig = {
+        clientConfig: clientConfig,
+        callingClientConfig: callingClientConfig,
+        logger: loggerConfig
+    }
+
+    return callingConfig;
 }
 
 function openCallWindow(num) {
@@ -106,9 +155,14 @@ function openCallWindow(num) {
     }
 }
 
+function openKeypad() {
+    agentNumpad = document.getElementById('agent-numpad');
+    agentNumpad.classList.contains('show') ? agentNumpad.classList.remove('show') : agentNumpad.classList.add('show');
+}
+
 function closeCallWindow() {   
+    callWindowHeaderTimer.stop();
     callWindow.classList.add('hidden');
-    transferSection.classList.remove('hidden');
 }
 
 function updateCallerId(CallerIdEmitter) {

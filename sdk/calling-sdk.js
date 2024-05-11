@@ -9,82 +9,34 @@ let call;
 let incomingCall;
 let localAudioStream;
 
-const agentLoginBtn = document.querySelector('#agent-login-btn');
 const makeCallBtn = document.querySelector('.call-support-btn');
 const muteBtn = document.getElementById('mute-unmute-btn');
 const holdBtn = document.getElementById('hold-resume-btn');
 
+// Step 1: Initialize Calling, pass calling config with relevant values to setup different clients available in the Calling SDK
+// Step 2: Fetch the calling client, fetch the lines created for the user whose access token has been shared and register the line
 async function initCalling(userType) {
-    const accessToken = getAccessToken(userType);
-
-    const webexConfig = {
-        config: {
-            logger: {
-                level: 'debug', // set the desired log level
-            },
-            meetings: {
-                reconnection: {
-                    enabled: true,
-                },
-                enableRtx: true,
-            },
-            encryption: {
-                kmsInitialTimeout: 8000,
-                kmsMaxTimeout: 40000,
-                batcherMaxCalls: 30,
-                caroots: null,
-            },
-            dss: {},
-        },
-        credentials: {
-            access_token: accessToken
-        }
-    };
-
-    const clientConfig = {
-        calling: true,
-        callHistory: true,
-        callSettings: true,
-    }
-
-    const loggerConfig = {
-        level: 'info'
-    }
-
-    const serviceData = {indicator: 'calling', domain: ''};
-
-    const callingClientConfig = {
-        logger: loggerConfig,
-        discovery: {
-            region: '',
-            country: '',
-        },
-        serviceData,
-    };
-
-    const callingConfig = {
-        clientConfig: clientConfig,
-        callingClientConfig: callingClientConfig,
-        logger: loggerConfig
-    }
+    const webexConfig = getWebexConfig(userType);
+    const callingConfig = getCallingConfig();
 
     // Initializing Calling
     calling = await Calling.init({ webexConfig, callingConfig });
-
     
     try {
+
+        // Listen for ready event to identify if calling is ready
         calling.on("ready", () => {
-          console.log("Authentication :: Calling Ready");
-    
-          calling.register().then(async () => {
-            // Fetch the calling client
+            // register with webex calling
+            calling.register().then(async () => {
+            
+            // Fetch the calling client 
             callingClient = window.callingClient = calling.callingClient;
     
             // Fetch lines
             line = Object.values(callingClient?.getLines())[0];
     
             // Trigger Line Registration
-            setupLineListeners(userType);
+            setupLineListeners();
             line.register();
     
             if (userType === "agent") {
@@ -122,16 +74,10 @@ async function initCalling(userType) {
     }
 }
 
-
-function setupLineListeners(userType) {
+// Step 3: Setup listeners on the registered line
+function setupLineListeners() {
     try {
-        line.on('registered', (lineInfo) => {
-            if (userType === 'agent') {
-                agentLoginBtn.innerText = 'Agent : Benjamin';
-                agentLoginBtn.classList.add('agent-login-btn');
-                agentLoginBtn.disabled = false;
-            }
-    
+        line.on('registered', (lineInfo) => {    
             line = lineInfo;
         });
     
@@ -154,7 +100,6 @@ function setupLineListeners(userType) {
         console.log("DEMO: Failed while setting up line listeners");
     }
 }
-    
 
 const callNotifyEvent = new CustomEvent('line:incoming_call', {
     detail: {
@@ -174,7 +119,7 @@ async function getMediaStreams() {
     }
 }
 
-// Trigger an outbound call
+// Step 5: Create a call instance, get the stream and initiate an outbound call. Setup call listeners are the same time to the call progressing different states
 async function initiateCall(number) {
    try {
         const destination = {
@@ -198,7 +143,7 @@ async function initiateCall(number) {
         });
     
         call.on('connect', (correlationId) => {
-            // start the timer
+            callWindowHeaderTimer.start();
         });
     
         call.on('remote_media', (track) => {
@@ -215,11 +160,14 @@ async function initiateCall(number) {
     }
 }
 
+// Step 6: Fetch the call instance from the call notification, setup call listeners, create media stream and answer the incoming call
 async function answerCall() {
     try {
         callNotification.toggle();
         swapDivs();
         openCallWindow();
+        callWindowHeaderTimer.start();
+
         await getMediaStreams();
 
         incomingCall.answer(localAudioStream);
@@ -242,13 +190,7 @@ async function answerCall() {
     } 
 }
 
-// Mute or unmute the call
-function toggleMute() {
-    incomingCall.mute(localAudioStream);
-    updateBtnText(muteBtn);
-}
-
-// Trigger hold or resume
+// Step 7: Put the call on hold and resume back
 function holdResume() {
     try {
         incomingCall.doHoldResume();
@@ -258,11 +200,10 @@ function holdResume() {
     }
 }
 
-// Disconnect the call
+// Step 8: Disconnect the call
 function disconnectCall() {
     try {
         call.end();
-        callWindowHeaderTimer.stop();
         closeCallWindow();
     } catch (err) {
         console.log("DEMO: failed to disconnect the call");
@@ -270,13 +211,20 @@ function disconnectCall() {
 }
 
 
-// Initiate call transfer, puts the existing call on hold and initiates new call with transfer target
+// STEP 1-6 are the same.
+// Step 7: Initiate the call transfer by putting the existing call on hold and initiating new call with transfer target
 function initiateTransfer() {
     holdResume();
     openKeypad();
 }
 
-// Finished the consult transfer by connecting the caller with the transfer target
+// Step 8: Finish the consult transfer by connecting the caller with the transfer target
 function commitConsultTransfer() {
     incomingCall.completeTransfer('CONSULT', call.getCallId(), undefined);
+}
+
+// Mute or unmute the call
+function toggleMute() {
+    incomingCall.mute(localAudioStream);
+    updateBtnText(muteBtn);
 }
