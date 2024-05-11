@@ -12,6 +12,12 @@ const makeCallBtn = document.querySelector('.call-support-btn');
 const muteBtn = document.getElementById('mute-unmute-btn');
 const holdBtn = document.getElementById('hold-resume-btn');
 
+const callNotifyEvent = new CustomEvent('line:incoming_call', {
+    detail: {
+        callObject: call,
+    },
+});
+
 // Demo Flow 1
 // Step 1: Initialize Calling, pass calling config with relevant values to setup different clienets available in Calling SDK
 // Step 2: Fetch the calling client and fetch the lines created for the user whose access token has been shared and register the line
@@ -82,18 +88,8 @@ function setupLineListeners() {
     
         // Start listening for incoming calls on the line
         line.on('line:incoming_call', (callObj) => {
-            callNotification.toggle();
+            openCallNotification(callObj);
             incomingCall = callObj;
-    
-            callNotifyEvent.detail.callObject = callObj;
-            correlationId = callObj.getCorrelationId();
-            console.log(`APP.JS::  Incoming Call with correlationId: ${correlationId}`);
-            broadworksCorrelationInfo = callObj.getBroadworksCorrelationInfo();
-            if (broadworksCorrelationInfo !== undefined) {
-                console.log(
-                    `APP.JS::  Incoming Call with broadworksCorrelationInfo: ${broadworksCorrelationInfo}`
-                );
-            }
         });
     } catch (err) {
         console.log("DEMO: Failed while setting up line listeners");

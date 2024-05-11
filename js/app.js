@@ -78,6 +78,11 @@ function swapDivs() {
     }
 }
 
+function openCallNotification(callObj) {
+    callNotification.toggle();
+    callNotifyEvent.detail.callObject = callObj;
+}
+
 function getWebexConfig(userType) {
     let access_token;
     if (userType === 'customer') {
@@ -160,9 +165,9 @@ function openKeypad() {
     agentNumpad.classList.contains('show') ? agentNumpad.classList.remove('show') : agentNumpad.classList.add('show');
 }
 
-function closeCallWindow() {   
-    callWindowHeaderTimer.stop();
+function closeCallWindow() {
     callWindow.classList.add('hidden');
+    callWindowHeaderTimer.stop();
 }
 
 function updateCallerId(CallerIdEmitter) {

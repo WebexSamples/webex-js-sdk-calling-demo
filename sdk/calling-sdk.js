@@ -13,6 +13,12 @@ const makeCallBtn = document.querySelector('.call-support-btn');
 const muteBtn = document.getElementById('mute-unmute-btn');
 const holdBtn = document.getElementById('hold-resume-btn');
 
+const callNotifyEvent = new CustomEvent('line:incoming_call', {
+    detail: {
+        callObject: call,
+    },
+});
+
 // Step 1: Initialize Calling, pass calling config with relevant values to setup different clients available in the Calling SDK
 // Step 2: Fetch the calling client, fetch the lines created for the user whose access token has been shared and register the line
 async function initCalling(userType) {
@@ -83,29 +89,15 @@ function setupLineListeners() {
     
         // Start listening for incoming calls
         line.on('line:incoming_call', (callObj) => {
-            callNotification.toggle();
+            openCallNotification(callObj);
             incomingCall = callObj;
-    
-            callNotifyEvent.detail.callObject = callObj;
-            correlationId = callObj.getCorrelationId();
-            console.log(`APP.JS::  Incoming Call with correlationId: ${correlationId}`);
-            broadworksCorrelationInfo = callObj.getBroadworksCorrelationInfo();
-            if (broadworksCorrelationInfo !== undefined) {
-                console.log(
-                    `APP.JS::  Incoming Call with broadworksCorrelationInfo: ${broadworksCorrelationInfo}`
-                );
-            }
         });
     } catch (err) {
         console.log("DEMO: Failed while setting up line listeners");
     }
 }
 
-const callNotifyEvent = new CustomEvent('line:incoming_call', {
-    detail: {
-        callObject: call,
-    },
-});
+
 
 // Create microphone stream which will be used as local audio stream for calls
 async function getMediaStreams() {

@@ -3116,15 +3116,7 @@ button.btn1:hover{
 	margin-right: 8px; /* Add some space between the icon and the button text */
   }
 
-  h4 {
-	text-align: center;
-  }
-
-  h5 {
-	text-align: center;
-  }
-
-  h6 {
+  h1, h4, h5, h6 {
 	text-align: center;
   }
 
