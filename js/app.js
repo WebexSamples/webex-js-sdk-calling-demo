@@ -214,10 +214,10 @@ function renderCallHistoryItem(call) {
         </div>
         <div class="call-indicator">
           <div class="call-date">${callDate}</div>
-          <i class="fas ${directionIcon}"></i>
+          <i class="fas ${directionIcon}" style="transform: rotate(45deg);"></i>
         </div>
         <div class="make-call">
-            <button class="attend-call-btn"><i class="fa fa-phone" aria-hidden="true" style="transform: rotateZ(103deg);"></i></button>
+            <button class="attend-call-btn"><i class="fa fa-phone" aria-hidden="true" style="transform: rotateZ(90deg);"></i></button>
         </div>
       </div>
     `;

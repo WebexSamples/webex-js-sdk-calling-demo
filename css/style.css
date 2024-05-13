@@ -94,6 +94,12 @@ div#bs-example-navbar-collapse-1 {
 	text-decoration:none;
 	font-family: 'roboto', 'Pacifico', cursive;
 }
+.logo.agent h1 a{
+	color: #ff9a06;
+}
+.logo.mytrips h1 a{
+	color:#027bff;
+}
 /*-- top-nav --*/
 .top-nav {
     margin: 2em 0 0 0;
@@ -125,6 +131,12 @@ ul.nav.navbar-nav {
     margin: 0;
     text-decoration: none;
     padding: 0;
+}
+.top-nav.agent ul li a:hover{
+    color: #faa01a  !important;
+}
+.top-nav.agent ul li a.active{
+    color: #ff9a07 !important;
 }
 .top-nav ul li a:hover{
     color: #5c9ffd !important;
@@ -2645,8 +2657,15 @@ button.btn1:hover{
 	cursor: pointer;
 }
 
+.view-booking-btn.agent{
+	background-color: #ff9a07;
+}
+
+.view-booking-btn.agent:hover {
+	background-color: #ffb03b;
+}
 .view-booking-btn:hover {
-	background-color: #0056b3;
+background-color: #0056b3;
 }
 
 /* Icons from Font Awesome (Make sure to include the library) */
@@ -2934,7 +2953,7 @@ button.btn1:hover{
 /* Call History */
 .call-history-container {
 	width: 20rem;
-	background-color: aliceblue;
+	background-color: #fff;
 	border-radius: 8px;
 	box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
 	height: 30rem;
@@ -2964,7 +2983,7 @@ button.btn1:hover{
 
 .call-history-item:hover{
 	cursor: pointer;
-	background-color: #c9e4fb;
+	background-color:#fcd398;
 }
 
 .call-history-item .make-call{
@@ -2985,7 +3004,7 @@ button.btn1:hover{
 	width: 35px;
 	height: 35px;
 	border-radius: 20px;
-	background-color: #007bff;
+	background-color:#ff9a07;
 	color: white;
 	display: flex;
 	justify-content: center;
@@ -3182,3 +3201,10 @@ button.btn1:hover{
   
 /* Show the dropdown menu */
 .show {display: block;}  
+
+.agent-tab .nav-tabs.myTrips li:hover a#upcoming-tab,.agent-tab  .nav-tabs.myTrips li.active a#upcoming-tab {
+    color: #ff9a07;
+}
+.mytrips-tab .nav-tabs.myTrips li:hover a#upcoming-tab,.mytrips-tab  .nav-tabs.myTrips li.active a#upcoming-tab {
+    color:#1b77fa;
+}
