@@ -97,6 +97,12 @@ div#bs-example-navbar-collapse-1 {
   text-decoration: none;
   font-family: "roboto", "Pacifico", cursive;
 }
+.logo.agent h1 a{
+	color: #ff9a06;
+}
+.logo.mytrips h1 a{
+	color:#027bff;
+}
 /*-- top-nav --*/
 .top-nav {
   margin: 2em 0 0 0;
@@ -131,8 +137,14 @@ ul.nav.navbar-nav {
   text-decoration: none;
   padding: 0;
 }
-.top-nav ul li a:hover {
-  color: #5c9ffd !important;
+.top-nav.agent ul li a:hover{
+    color: #faa01a  !important;
+}
+.top-nav.agent ul li a.active{
+    color: #ff9a07 !important;
+}
+.top-nav ul li a:hover{
+    color: #5c9ffd !important;
 }
 .top-nav ul li a.active {
   color: #5c9ffd !important;
@@ -2758,6 +2770,13 @@ button.btn1:hover {
   cursor: pointer;
 }
 
+.view-booking-btn.agent{
+	background-color: #ff9a07;
+}
+
+.view-booking-btn.agent:hover {
+	background-color: #ffb03b;
+}
 .view-booking-btn:hover {
   background-color: #0056b3;
 }
@@ -3313,6 +3332,11 @@ h6 {
 }
 
 /* Show the dropdown menu */
-.show {
-  display: block;
+.show {display: block;}  
+
+.agent-tab .nav-tabs.myTrips li:hover a#upcoming-tab,.agent-tab  .nav-tabs.myTrips li.active a#upcoming-tab {
+    color: #ff9a07;
+}
+.mytrips-tab .nav-tabs.myTrips li:hover a#upcoming-tab,.mytrips-tab  .nav-tabs.myTrips li.active a#upcoming-tab {
+    color:#1b77fa;
 }
