@@ -38,7 +38,7 @@ License URL: http://creativecommons.org/licenses/by/3.0/
 </head>
 <body>
 	<!-- banner -->
-	<div class="banner about-bg">
+	<div id="body-header" class="banner about-bg">
 		<div class="top-banner about-top-banner">
 			<div class="container">
 				<div class="top-banner-left">
@@ -90,7 +90,7 @@ License URL: http://creativecommons.org/licenses/by/3.0/
 	</div>
 	<!-- //banner -->
 	<!-- blog -->
-		<div class="blog agent-blog">
+		<div id="body" class="blog agent-blog">
 			<!-- container -->
 			<div class="container">
 				<div class="col-md-offset-1 col-md-10 blog-top-left-grid">
@@ -277,6 +277,7 @@ License URL: http://creativecommons.org/licenses/by/3.0/
 		<!-- Keypad and its button -->
 	
 		<div id="agent-numpad" class="keypad-container agent-numpad">
+			<button onclick="openKeypad()" style="all: unset; position: absolute; top: 0rem; left: 16rem; cursor: pointer;">x</button>
 			<div class="keypad-row" style="margin-bottom: 1.5rem; position: relative">
 				<input type="text" name="phone-number" id="phone-number" class="phone-number-input" placeholder="Dial" />
 				<button id="input-clear-btn" class="input-clear-btn">x</button>
