@@ -2749,18 +2749,13 @@ button.btn1:hover{
 
 .keypad-container.agent-numpad{
 	position:fixed;
-	top: 125px;
-    right: 2px;
+	top: 130px;
+    right: 10px;
 	width: 17rem;
 	box-shadow: 0px 3px 5px rgba(0,0,0,0.5);
 	visibility: hidden;
 	opacity: 0;
-	transition-duration: 0.25s;
-	/* -moz-transition-duration: 0.5s;
-	-webkit-transition-duration: 0.5s;
-	-o-transition-duration: 0.5s;
-	-ms-transition-duration: 0.5s; */
-	transition: height 0.25s ease-in;
+	transition: all 0.25s ease-in;
 	
 }
 
@@ -2787,9 +2782,6 @@ button.btn1:hover{
 
 /* Incoming Call Notification Styles */
 .incoming-call-notification {
-    display: flex;
-    align-items: center;
-    justify-content: start;
     background-color: #000;
     color: white;
     padding: 10px;
@@ -2801,14 +2793,30 @@ button.btn1:hover{
     min-width: 320px; /* Set a minimum width */
     max-width: 100%; /* Ensure it doesn't exceed the screen width */
 	opacity: 0;
-    transition: right 0.2s ease-in-out, opacity 0.5s ease-in-out;
+    transition: right 0.25s ease-in-out, opacity 0.5s ease-in-out;
     z-index: 9999; /* Ensure it floats above other content */
+}
+
+.incoming-call-notification .notifier-a{
+	display: flex;
+	align-items: center;
+	justify-content: start;
 }
 
 /* To make the notification visible, add a class or modify the top property to 10px */
 .incoming-call-notification.show-notification {
 	opacity: 1;
     right: 50px; /* Adjust spacing from the top as needed */
+}
+
+#secondCallNotification.incoming-call-notification.show-notification{
+	opacity: 1;
+    right: 135px;
+    min-width: 150px;
+}
+
+.incoming-call-notification.show-notification.switch-look {
+	right: 300px;
 }
 
 .incoming-call-notification.timestate .call-actions .attend-call-btn{
@@ -2820,8 +2828,21 @@ button.btn1:hover{
 }
 
 .incoming-call-notification.timestate .call-time{
-	margin-right: 15px;
-	display: flex;
+	margin: 7.5px;
+	display: block;
+}
+
+.incoming-call-notification.timestate .call-time span#hold-status{
+	display: none;
+}
+
+.incoming-call-notification.timestate .call-time.on-hold span#hold-status{
+	display: block;
+	color: orange;
+}
+
+.incoming-call-notification.timestate .call-time.on-hold span#timer{
+	display: none;
 }
 
 .avatar {
@@ -2844,10 +2865,12 @@ button.btn1:hover{
     text-overflow: ellipsis; /* Add ellipsis if the text is too long */
 }
 
-.call-actions {
-    display: flex;
-    gap: 10px;
-    flex-shrink: 0; /* Prevent the buttons from shrinking */
+.call-actions button{
+    margin-right: 10px;
+}
+
+.timestate.switch-look .call-actions button{
+	margin-right: 0px;
 }
 
 .attend-call-btn,
@@ -2858,7 +2881,6 @@ button.btn1:hover{
     border-radius: 50%;
     cursor: pointer;
     color: white;
-    display: flex; /* Ensure icons center within buttons */
     align-items: center;
     justify-content: center;
 }
@@ -2878,6 +2900,60 @@ button.btn1:hover{
 
 .cut-call-btn:hover {
     background-color: #c82333;
+}
+
+.notifier-a-controls.hide-controls{
+	display: flex;
+	align-items: center;
+	justify-content: space-between;
+	border-top: 0.5px solid #ccc;
+	margin-top: 0px;
+	padding:0px;
+	padding-bottom: 0;
+	height:0px;
+	opacity: 0;
+}
+
+.notifier-a-controls{
+	display: flex;
+	align-items: center;
+	justify-content: space-between;
+	border-top: 0.5px solid #ccc;
+	margin-top: 5px;
+	padding:5px;
+	padding-bottom: 0;
+	transition: all 0.2s ease-in-out;
+}
+
+.notifier-a-controls button {
+    color: white;
+    background: black;
+    border: 1px solid black;
+	text-align: center;
+	width: 100%;
+}
+
+.notifier-a-controls button.mute:hover,
+.notifier-a-controls button.hold:hover,
+.notifier-a-controls button.mute.muted,
+.notifier-a-controls button.hold.held{
+	color:#dc3545;
+}
+
+.notifier-a-controls button.transfer.in-progress,
+.notifier-a-controls button.transfer:hover{
+	color: rgba(25, 176, 25, 0.894)
+}
+
+.incoming-call-notification.switch-look{
+	min-width: unset;
+	transition: all 0.2s ease-in-out;
+}
+
+.incoming-call-notification.switch-look .notifier-a{
+	display: block;
+	text-align: center;
+	transition: all 0.2s ease-in-out;
 }
 
 /* ... (rest of your styles) ... */
@@ -3003,7 +3079,7 @@ button.btn1:hover{
 }
 
 .call-date, .call-time {
-	color: #666;
+	color: #979696;
 	font-size: 14px;
 }
 
@@ -3182,3 +3258,13 @@ button.btn1:hover{
   
 /* Show the dropdown menu */
 .show {display: block;}  
+
+.blink_me {
+	animation: blinker 1.2s linear infinite;
+}
+  
+@keyframes blinker {
+	50% {
+		opacity: 0;
+	}
+}

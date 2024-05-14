@@ -1,6 +1,11 @@
-let agentNumpad;
-const callNotification = document.getElementById('callNotification');
-const callTime = document.getElementById('call-time');
+let agentNumpad, callNotification, secondCallNotification;
+const callNotificationElem = document.getElementById('callNotification');
+const secondCallNotificationElem = document.getElementById('secondCallNotification');
+
+const callTimeOuter = document.querySelector('#call-time');
+const callTimer = document.querySelector('#call-time span#timer');
+const callHoldStatus = document.querySelector('#call-time span#hold-status');
+
 const callWindow = document.getElementById('call-window');
 const callWindowHeader = document.getElementById('call-window-header');
 const callWindowHeaderH1 = callWindowHeader.querySelector('h1');
@@ -16,58 +21,82 @@ const transferBtn = document.getElementById('agent-numpad-trigger');
 
 const profileDropDown = document.getElementById("myDropdown");
 
-let timer = {
-    minutes: 0,
-    seconds: 0,
-    interval: null,
-    start: () => {
-        timer.interval = setInterval(() => {
-            timer.seconds++;
-            if(timer.seconds === 60){
-                timer.seconds = 0;
-                timer.minutes++;
-            }
-            callTime.innerHTML = `${timer.minutes < 10 ? '0' + timer.minutes : timer.minutes}:${timer.seconds < 10 ? '0' + timer.seconds : timer.seconds}`;
-        }, 1000);
-    },
-    pause: () => {
-        clearInterval(timer.interval);
-    },
-    continue: () => {
-        timer.start();
-    },
-    stop: () => {
-        clearInterval(timer.interval);
-        timer.minutes = 0;
-        timer.seconds = 0;
-        callTime.innerHTML = '00:01';
-    },
-}
+class callNotificationElement {
+    constructor(element,callTimerElement){
+        this.callNotification = element;
+        this.callNotificationTimer = new Timer(callTimerElement);
+        this.callNotificationControls = this.callNotification.querySelector('.notifier-a-controls');
+        this.callNotificationControls_mute = this.callNotificationControls.querySelector('.mute');
+        this.callNotificationControls_hold = this.callNotificationControls.querySelector('.hold');
+        this.callNotificationControls_transfer = this.callNotificationControls.querySelector('.transfer');
+    }
 
-if(callNotification){
-    const callNotificationTimer = new Timer(callTime);
-    callNotification.__proto__.toggle = () => {
-        if(callNotification.classList.contains('show-notification')){
-            callNotification.classList.remove('show-notification');
+    toggle(){
+        if(this.callNotification.classList.contains('show-notification')){
+            this.callNotification.classList.remove('show-notification');
             setTimeout(() => { 
-                callNotification.classList.remove('timestate');
-                timer.stop();
+                this.callNotification.classList.remove('timestate');
+                this.callNotificationTimer.stop();
             }, 2500);
         }
         else{
-            callNotification.classList.add('show-notification');
+            this.callNotification.classList.add('show-notification');
         }
-        return callNotificationTimer;
+        return this.callNotificationTimer;
     }
 
-    callNotification.__proto__.startTimer = () => {
-        callNotification.classList.contains('timestate') ? callNotification.classList.remove('timestate') : callNotification.classList.add('timestate');
-        callNotificationTimer.start();
-        return callNotificationTimer;
+    startTimer(){
+        this.callNotification.classList.contains('timestate') ? this.callNotification.classList.remove('timestate') : this.callNotification.classList.add('timestate');
+        this.callNotificationTimer.start();
+        this.callNotificationControls.classList.remove('hide-controls');
+        return this.callNotificationTimer;
+    }
+
+    transferToggle(){
+        this.callNotification.classList.contains('switch-look') ? this.callNotification.classList.remove('switch-look') : this.callNotification.classList.add('switch-look');
+        this.callNotificationControls_transfer.classList.contains('in-progress') ? this.callNotificationControls_transfer.classList.remove('in-progress') : this.callNotificationControls_transfer.classList.add('in-progress');
+    }
+
+    holdToggle(){
+        callTimeOuter.classList.contains('on-hold') ? callTimeOuter.classList.remove('on-hold') : callTimeOuter.classList.add('on-hold');
+        this.callNotificationControls_hold.classList.contains('held') ? this.callNotificationControls_hold.classList.remove('held') : this.callNotificationControls_hold.classList.add('held');
+    }
+
+    muteToggle(){
+        this.callNotificationControls_mute.classList.contains('muted') ? this.callNotificationControls_mute.classList.remove('muted') : this.callNotificationControls_mute.classList.add('muted');
     }
 }
 
-function swapDivs() {
+class secondCallNotificationElement extends callNotificationElement{
+    constructor(element,callTimerElement){
+        super(element,callTimerElement);
+    }
+
+    toggle(){
+        if(this.callNotification.classList.contains('show-notification')){
+            this.callNotification.classList.remove('show-notification');
+            setTimeout(() => { 
+                this.callNotification.classList.remove('timestate');
+                this.callNotificationTimer.stop();
+            }, 2500);
+        }
+        else{
+            this.callNotification.classList.add('show-notification');
+            this.startTimer();
+        }
+        return this.callNotificationTimer;
+    }
+}
+
+if(callNotificationElem){
+    callNotification = new callNotificationElement(callNotificationElem,callTimer);
+}
+
+if(secondCallNotificationElem){
+    secondCallNotification = new secondCallNotificationElement(secondCallNotificationElem,callTimer);
+}
+
+function fetchCallerBooking() {
     var mikeross = document.getElementsByClassName('hider-mikeross');
     var harveyspecter = document.getElementsByClassName('hider-harveyspecter');
     for (var i = 0; i < mikeross.length; i++) {
@@ -150,11 +179,12 @@ function getCallingConfig() {
 
 function openCallWindow(num) {
     if (num === '5007') {
-        holdStatus.innerText = 'On hold'
-        muteBtn.remove();
-        transferBtn.remove();
+        // holdStatus.innerText = 'On hold'
+        // muteBtn.remove();
+        // transferBtn.remove();
         agentNumpad.classList.add('hidden');
-        transferSection.classList.remove('hidden');
+        secondCallNotification.toggle();
+        // transferSection.classList.remove('hidden');
     } else {
         callWindow.classList.remove('hidden');
     }
@@ -166,8 +196,9 @@ function openKeypad() {
 }
 
 function closeCallWindow() {
-    callWindow.classList.add('hidden');
-    callWindowHeaderTimer.stop();
+    callNotification.toggle();
+    // callWindow.classList.add('hidden');
+    // callWindowHeaderTimer.stop();
 }
 
 function updateCallerId(CallerIdEmitter) {
@@ -203,7 +234,6 @@ function renderCallHistoryItem(call) {
     const avatarInitial = 'Harvey Specter'.charAt(0).toUpperCase();
     const directionIcon = call.direction === 'OUTGOING' ? 'fa-arrow-up' : 'fa-arrow-down';
     const callDate = new Date(call.startTime).toLocaleDateString();
-    const callTime = new Date(call.startTime).toLocaleTimeString();
 
     return `
       <div class="call-history-item">

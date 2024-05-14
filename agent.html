@@ -147,7 +147,7 @@ License URL: http://creativecommons.org/licenses/by/3.0/
 											<div class="details">
 												<div class="detail-item">
 													<div class="label"><i class="fas fa-plane-departure"></i>Departure</div>
-													<div class="info">Chennai (MAA)</div>
+													<div class="info">New York (JFK)</div>
 												</div>
 												<div class="detail-separator"></div>
 												<div class="detail-item">
@@ -331,18 +331,47 @@ License URL: http://creativecommons.org/licenses/by/3.0/
 
 		<!-- Call Notification -->
 		<div class="incoming-call-notification" id="callNotification">
-			<img class="avatar" src="images/harvey_avatar.jpeg" alt="Callee Avatar">
-			<div class="call-info">
-				<div class="callee-name">Harvey Specter</div>
-				<div class="phone-number">+1 888 555 4856</div>
+			<div class="notifier-a">
+				<img class="avatar" src="images/harvey_avatar.jpeg" alt="Callee Avatar">
+				<div class="call-info">
+					<div class="callee-name">Harvey Specter</div>
+					<div class="phone-number">+1 888 555 4856</div>
+				</div>
+				<div class="call-time" id="call-time">
+					<span id="timer">00:01</span>
+					<span class="blink_me" id="hold-status">On Hold</span>
+				</div>
+				<div class="call-actions">
+					<button class="attend-call-btn" onclick="answerCall()">
+						<i class="fa fa-phone" aria-hidden="true" style="transform: rotateZ(103deg);"></i>
+					<button class="cut-call-btn"><i class="fa fa-phone-slash" style="transform: rotateZ(103deg);"></i></button>
+				</div>
 			</div>
-			<div class="call-time" id="call-time">
-				<span>00:01</span>
+			<div class="notifier-a-controls hide-controls" id="notifier-a-controls">
+				<button class="mute" onclick="toggleMute()"><i class="fa fa-microphone-slash"></i></button>
+				<button class="hold" onclick="holdResume()"><i class="fa fa-pause"></i></button>
+				<button class="transfer" onclick="initiateTransfer()"><i class="fa fa-random"></i></button>
 			</div>
-			<div class="call-actions">
-				<button class="attend-call-btn" onclick="answerCall()">
-					<i class="fa fa-phone" aria-hidden="true" style="transform: rotateZ(103deg);"></i>
-				<button class="cut-call-btn"><i class="fa fa-phone-slash" style="transform: rotateZ(103deg);"></i></button>
+		</div>
+
+		<!-- Second Call Notification -->
+		<div class="incoming-call-notification switch-look" id="secondCallNotification">
+			<div class="notifier-a">
+				<img class="avatar" src="images/harvey_avatar.jpeg" alt="Callee Avatar">
+				<div class="call-info">
+					<div class="callee-name">Jane Doe</div>
+					<div class="phone-number">5007</div>
+				</div>
+				<div class="call-time" id="call-time">
+					<span id="timer">00:01</span>
+					<span class="blink_me" id="hold-status">On Hold</span>
+				</div>
+				<div class="call-actions">
+					<button class="cut-call-btn"><i class="fa fa-phone-slash" style="transform: rotateZ(103deg);"></i></button>
+				</div>
+			</div>
+			<div class="notifier-a-controls hide-controls" id="notifier-a-controls">
+				<button class="transfer" onclick="commitConsultTransfer()"><i class="fa fa-arrow-right"></i></button>
 			</div>
 		</div>
 		 <!-- Call History -->
@@ -391,7 +420,7 @@ License URL: http://creativecommons.org/licenses/by/3.0/
 	<script src="./controls/controls.js"></script>
 	<script type="text/javascript">
 		window.onload = () => {
-			initCalling('agent');
+			// initCalling('agent');
 		}
 	</script>
 </body>	
