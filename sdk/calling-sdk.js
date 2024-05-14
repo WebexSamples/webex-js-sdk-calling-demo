@@ -135,7 +135,8 @@ async function initiateCall(number) {
         });
     
         call.on('connect', (correlationId) => {
-            callWindowHeaderTimer.start();
+            secondCallNotification.startTimer();
+            secondCallNotification.enableCompleteTransfer();
         });
     
         call.on('remote_media', (track) => {

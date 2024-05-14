@@ -3013,8 +3013,8 @@ button.btn1:hover {
     border-radius: 50%;
     cursor: pointer;
     color: white;
-    align-items: center;
-    justify-content: center;
+    height: 36px;
+	width: 36px;
 }
 
 .attend-call-btn {
@@ -3023,7 +3023,6 @@ button.btn1:hover {
 
 .cut-call-btn {
   background-color: #dc3545;
-  height: 36px;
 }
 
 .attend-call-btn:hover {

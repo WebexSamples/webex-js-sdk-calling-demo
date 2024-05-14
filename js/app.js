@@ -48,7 +48,7 @@ class callNotificationElement {
     }
 
     startTimer(){
-        this.callNotification.classList.contains('timestate') ? this.callNotification.classList.remove('timestate') : this.callNotification.classList.add('timestate');
+        this.callNotification.classList.add('timestate');
         this.callNotificationTimer.start();
         this.callNotificationControls.classList.remove('hide-controls');
         return this.callNotificationTimer;
@@ -67,27 +67,6 @@ class callNotificationElement {
     muteToggle(){
         this.callNotificationControls_mute.classList.contains('muted') ? this.callNotificationControls_mute.classList.remove('muted') : this.callNotificationControls_mute.classList.add('muted');
     }
-}
-
-class secondCallNotificationElement extends callNotificationElement{
-    constructor(element,callTimerElement){
-        super(element,callTimerElement);
-    }
-
-    toggle(){
-        if(this.callNotification.classList.contains('show-notification')){
-            this.callNotification.classList.remove('show-notification');
-            setTimeout(() => { 
-                this.callNotification.classList.remove('timestate');
-                this.callNotificationTimer.stop();
-            }, 2500);
-        }
-        else{
-            this.callNotification.classList.add('show-notification');
-            this.startTimer();
-        }
-        return this.callNotificationTimer;
-    }
 
     enableCompleteTransfer(){
         this.callNotificationControls_transfer.classList.remove('disabled');
@@ -99,7 +78,7 @@ if(callNotificationElem){
 }
 
 if(secondCallNotificationElem){
-    secondCallNotification = new secondCallNotificationElement(secondCallNotificationElem,secondCallTimer);
+    secondCallNotification = new callNotificationElement(secondCallNotificationElem,secondCallTimer);
 }
 
 function fetchCallerBooking() {
