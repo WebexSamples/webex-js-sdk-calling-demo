@@ -3077,6 +3077,11 @@ button.btn1:hover {
 	color: rgba(25, 176, 25, 0.894)
 }
 
+.notifier-a-controls button.transfer.disabled{
+	color: grey;
+	cursor: not-allowed;
+}
+
 .incoming-call-notification.switch-look{
 	min-width: unset;
 	transition: all 0.2s ease-in-out;

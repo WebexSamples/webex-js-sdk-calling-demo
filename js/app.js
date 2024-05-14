@@ -88,6 +88,10 @@ class secondCallNotificationElement extends callNotificationElement{
         }
         return this.callNotificationTimer;
     }
+
+    enableCompleteTransfer(){
+        this.callNotificationControls_transfer.classList.remove('disabled');
+    }
 }
 
 if(callNotificationElem){
