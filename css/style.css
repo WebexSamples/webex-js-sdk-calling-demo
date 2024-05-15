@@ -2926,7 +2926,7 @@ button.btn1:hover {
     max-width: 100%; /* Ensure it doesn't exceed the screen width */
 	opacity: 0;
     transition: right 0.25s ease-in-out, opacity 0.5s ease-in-out;
-    z-index: 9999; /* Ensure it floats above other content */
+    z-index: 9998; /* Ensure it floats above other content */
 }
 
 .incoming-call-notification .notifier-a{
@@ -3430,4 +3430,20 @@ h6 {
 }
 .mytrips-tab .nav-tabs.myTrips li:hover a#upcoming-tab,.mytrips-tab  .nav-tabs.myTrips li.active a#upcoming-tab {
     color:#1b77fa;
+}
+
+
+.tooltip-calling {
+	display: none;
+	position: fixed;
+	background-color: #333;
+	color: #fff;
+	padding: 5px 10px;
+	border-radius: 4px;
+	font-size: 13px;
+	z-index: 9999;
+}
+  
+.tooltip-calling.show-tooltip {
+	display: block;
 }

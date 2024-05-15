@@ -48,11 +48,23 @@ class callNotificationElement {
 
     holdToggle(){
         callTimeOuter.classList.contains('on-hold') ? callTimeOuter.classList.remove('on-hold') : callTimeOuter.classList.add('on-hold');
-        this.callNotificationControls_hold.classList.contains('held') ? this.callNotificationControls_hold.classList.remove('held') : this.callNotificationControls_hold.classList.add('held');
+        this.callNotificationControls_hold.classList.contains('held') ? (
+            this.callNotificationControls_hold.classList.remove('held'),
+            this.callNotificationControls_hold.dataset.tooltip = "Hold"
+        ) : (
+            this.callNotificationControls_hold.classList.add('held'),
+            this.callNotificationControls_hold.dataset.tooltip = "Resume"
+        )
     }
 
     muteToggle(){
-        this.callNotificationControls_mute.classList.contains('muted') ? this.callNotificationControls_mute.classList.remove('muted') : this.callNotificationControls_mute.classList.add('muted');
+        this.callNotificationControls_mute.classList.contains('muted') ? (
+            this.callNotificationControls_mute.classList.remove('muted'),
+            this.callNotificationControls_mute.dataset.tooltip = "Mute"
+        ) : (
+            this.callNotificationControls_mute.classList.add('muted'),
+            this.callNotificationControls_mute.dataset.tooltip = "Unmute"
+        );
     }
 
     enableCompleteTransfer(){
@@ -253,3 +265,28 @@ document.querySelector(".dropbtn").addEventListener("click", (event) => {
 window.onclick = () => {
     profileDropDown.classList.remove("show");
 };
+
+document.addEventListener('DOMContentLoaded', function () {
+    var tooltipTriggers = document.querySelectorAll('.tooltip-trigger');
+    var tooltip = document.querySelector('.tooltip-calling');
+  
+    tooltipTriggers.forEach(function(trigger) {
+      trigger.addEventListener('mouseover', function() {
+        var tooltipText = this.getAttribute('data-tooltip');
+        tooltip.textContent = tooltipText;
+        
+        var triggerRect = this.getBoundingClientRect();
+        var tooltipRect = tooltip.getBoundingClientRect();
+        
+        tooltip.style.left = (triggerRect.left + (triggerRect.width - tooltipRect.width) / 2 + 10) + 'px';
+        tooltip.style.top = triggerRect.top - tooltipRect.height - 25 + 'px'; // 10px for a little space above the tooltip
+        
+        tooltip.classList.add('show-tooltip');
+      });
+  
+      trigger.addEventListener('mouseout', function() {
+        tooltip.classList.remove('show-tooltip');
+      });
+    });
+});
+  
