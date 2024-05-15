@@ -3374,6 +3374,23 @@ h6 {
   cursor: pointer;
   display: flex;
   align-items: center;
+  position: relative;
+}
+
+.dropbtn #availability{
+	color: #28a745;
+	position: absolute;
+	font-size: 12px;
+	bottom: 0;
+	left: 35px;
+	visibility: hidden;
+	opacity: 0;
+	transition: all 0.25s ease-in;
+}
+
+.dropbtn #availability.online{
+	visibility: visible;
+	opacity: 1;
 }
 
 /* Avatar image */

@@ -9,6 +9,7 @@ const callHoldStatus = document.querySelector('#callNotification #call-time span
 const secondCallTimer = document.querySelector('#secondCallNotification #call-time span#timer');
 
 const profileDropDown = document.getElementById("myDropdown");
+const profileOnline = document.querySelector(".dropbtn #availability");
 
 class callNotificationElement {
     constructor(element,callTimerElement){
@@ -251,6 +252,10 @@ function renderCallHistory(callHistoryData) {
     callHistoryList.innerHTML = callHistoryHTMLHeader + callHistoryHTML;
     callHistoryList.classList.add("show-history");
 }
+
+function updateAvailability(){
+    profileOnline.classList.add('online');
+}
   
 document.querySelector(".dropbtn").addEventListener("click", (event) => {
     if (profileDropDown.classList.contains("show")) {
@@ -289,4 +294,4 @@ document.addEventListener('DOMContentLoaded', function () {
       });
     });
 });
-  
+

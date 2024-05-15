@@ -85,6 +85,7 @@ function setupLineListeners() {
     try {
         line.on('registered', (lineInfo) => {    
             line = lineInfo;
+            updateAvailability();
         });
     
         // Start listening for incoming calls
