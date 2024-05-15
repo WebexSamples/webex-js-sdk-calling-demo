@@ -85,6 +85,7 @@ function setupLineListeners() {
     try {
         line.on('registered', (lineInfo) => {    
             line = lineInfo;
+            updateAvailability();
         });
     
         // Start listening for incoming calls
@@ -135,7 +136,15 @@ async function initiateCall(number) {
         });
     
         call.on('connect', (correlationId) => {
-            callWindowHeaderTimer.start();
+            if(number === "5007"){
+                secondCallNotification.startTimer();
+                secondCallNotification.enableCompleteTransfer();
+            }
+            else{
+                if(window.location.href.includes('mytrips')){
+                    callNotification.startTimer();
+                }
+            }
         });
     
         call.on('remote_media', (track) => {
@@ -155,14 +164,12 @@ async function initiateCall(number) {
 // Step 6: Fetch the call instance from the call notification, setup call listeners, create media stream and answer the incoming call
 async function answerCall() {
     try {
-        callNotification.toggle();
-        swapDivs();
-        openCallWindow();
-        callWindowHeaderTimer.start();
+        fetchCallerBooking();
 
         await getMediaStreams();
 
         incomingCall.answer(localAudioStream);
+        callNotification.startTimer();
 
         incomingCall.on('caller_id', (CallerIdEmitter) => {
             callerName.innerText = 'Harvey Spector';
@@ -186,7 +193,7 @@ async function answerCall() {
 function holdResume() {
     try {
         incomingCall.doHoldResume();
-        updateBtnText(holdBtn);
+        callNotification.holdToggle();
     } catch (err) {
         console.log("DEMO: Failed in hold/resume");
     }
@@ -207,16 +214,19 @@ function disconnectCall() {
 // Step 7: Initiate the call transfer by putting the existing call on hold and initiating new call with transfer target
 function initiateTransfer() {
     holdResume();
+    callNotification.transferToggle();
     openKeypad();
 }
 
 // Step 8: Finish the consult transfer by connecting the caller with the transfer target
 function commitConsultTransfer() {
     incomingCall.completeTransfer('CONSULT', call.getCallId(), undefined);
+    callNotification.toggle();
+    secondCallNotification.toggle();
 }
 
 // Mute or unmute the call
 function toggleMute() {
     incomingCall.mute(localAudioStream);
-    updateBtnText(muteBtn);
+    callNotification.muteToggle();
 }

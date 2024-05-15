@@ -51,6 +51,7 @@ License URL: http://creativecommons.org/licenses/by/3.0/
 					<button class="dropbtn">
 						<img src="images/benjamin_avatar.png" alt="Avatar" class="avatar">
 						<span class="avatar-name">Benjamin</span>
+						<i id="availability" class="fa fa-circle"></i>
 						<i class="fa fa-caret-down"></i>
 					</button>
 					<div class="dropdown-content" id="myDropdown">
@@ -147,7 +148,7 @@ License URL: http://creativecommons.org/licenses/by/3.0/
 											<div class="details">
 												<div class="detail-item">
 													<div class="label"><i class="fas fa-plane-departure"></i>Departure</div>
-													<div class="info">Chennai (MAA)</div>
+													<div class="info">New York (JFK)</div>
 												</div>
 												<div class="detail-separator"></div>
 												<div class="detail-item">
@@ -216,7 +217,7 @@ License URL: http://creativecommons.org/licenses/by/3.0/
 												<div class="detail-separator"></div>
 												<div class="detail-item">
 													<div class="label"><i class="fas fa-plane-arrival"></i>Arrival</div>
-													<div class="info">Heathrow (LHR)</div>
+													<div class="info">London (LHR)</div>
 												</div>
 												<div class="detail-separator"></div>
 												<div class="detail-item">
@@ -332,58 +333,55 @@ License URL: http://creativecommons.org/licenses/by/3.0/
 
 		<!-- Call Notification -->
 		<div class="incoming-call-notification" id="callNotification">
-			<img class="avatar" src="images/harvey_avatar.jpeg" alt="Callee Avatar">
-			<div class="call-info">
-				<div class="callee-name">Harvey Specter</div>
-				<div class="phone-number">+1 888 555 4856</div>
+			<div class="notifier-a">
+				<img class="avatar" src="images/harvey_avatar.jpeg" alt="Callee Avatar">
+				<div class="call-info">
+					<div class="callee-name">Harvey Specter</div>
+					<div class="phone-number">+1 888 555 4856</div>
+				</div>
+				<div class="call-time" id="call-time">
+					<span id="timer">00:01</span>
+					<span class="blink_me" id="hold-status">On Hold</span>
+				</div>
+				<div class="call-actions">
+					<button class="attend-call-btn" onclick="answerCall()">
+						<i class="fa fa-phone" aria-hidden="true" style="transform: rotateZ(90deg);"></i>
+					<button class="cut-call-btn" onclick="disconnectCall()"><i class="fa fa-times"></i></button>
+				</div>
 			</div>
-			<div class="call-time" id="call-time">
-				<span>00:01</span>
-			</div>
-			<div class="call-actions">
-				<button class="attend-call-btn" onclick="answerCall()">
-					<i class="fa fa-phone" aria-hidden="true" style="transform: rotateZ(90deg);"></i>
-				<button class="cut-call-btn"><i class="fa fa-phone-slash" style="transform: rotateZ(90deg);"></i></button>
+			<div class="notifier-a-controls hide-controls" id="notifier-a-controls">
+				<button class="mute tooltip-trigger" data-tooltip="Mute" onclick="toggleMute()"><i class="fa fa-microphone-slash"></i></button>
+				<button class="hold tooltip-trigger" data-tooltip="Hold" onclick="holdResume()"><i class="fa fa-pause"></i></button>
+				<button class="transfer tooltip-trigger" data-tooltip="Transfer Call" onclick="initiateTransfer()"><i class="fa fa-random"></i></button>
 			</div>
 		</div>
+
+		<!-- Second Call Notification -->
+		<div class="incoming-call-notification switch-look timestate" id="secondCallNotification">
+			<div class="notifier-a">
+				<img class="avatar" src="images/janedoe_avatar.png" alt="Callee Avatar">
+				<div class="call-info">
+					<div class="callee-name">Jane Doe</div>
+					<div class="phone-number">5007</div>
+				</div>
+				<div class="call-time" id="call-time">
+					<span id="timer">00:01</span>
+					<span class="blink_me" id="hold-status">On Hold</span>
+				</div>
+				<div class="call-actions">
+					<button class="cut-call-btn" onclick="disconnectCall()"><i class="fa fa-times"></i></button>
+				</div>
+			</div>
+			<div class="notifier-a-controls" id="notifier-a-controls">
+				<button class="transfer disabled tooltip-trigger" data-tooltip="Complete Transfer" onclick="commitConsultTransfer()"><i class="fa fa-arrow-right"></i></button>
+			</div>
+		</div>
+
+		<div class="tooltip-calling">Tooltip Text</div>
 		 <!-- Call History -->
 		<div class="call-history-container" id="callHistoryList"></div>
+		<audio id="agent-remote-audio" autoplay></audio>
 		<!-- //blog -->
-	<div id="call-window" class="call-window hidden">
-		<div id="call-section" class="call-section">
-			<div id="call-window-header" class="call-window-header">
-				<h1>00:00</h1>
-			</div>
-			<div id="call-window-body" class="call-window-body">
-				<h4 id="caller-name"></h4>
-				<h5 id="caller-number"></h5>
-				<h6 id="hold-status"></h6>
-				<audio id="local-audio" muted="true" autoplay></audio>
-				<audio id="agent-remote-audio" autoplay></audio>
-			</div>
-			<div id="call-window-footer" class="call-window-footer">
-				<button id="mute-unmute-btn" title="Mute Call" onclick="toggleMute()"><img class="img-icon-controls" src="./images/controls/mute.png"  alt="Mute Call"/>Mute</button>
-				<button id="hold-resume-btn" onclick="holdResume()">Hold</button>
-				<button id="agent-numpad-trigger" onclick="initiateTransfer()">
-					Transfer
-				</button>
-				<button id="end-call-btn" onclick="disconnectCall()"><img class="img-icon-controls" src="./images/controls/end-call.png"  alt="End Call"/></button>
-			</div>
-		</div>
-		<div id="transfer-section" class="transfer-section hidden">
-			<div class="transfer-window-header">
-				<h3>Call Timer</h3>
-			</div>
-			<div class="transfer-window-body">
-				<h4 id="transfer-name"></h4>
-				<h5 id="transfer-number"></h5>
-			</div>
-			<div class="transfer-window-footer">
-				<button onclick="commitConsultTransfer()">Complete Transfer</button>
-				<button id="end-call-btn" onclick="disconnectCall()"><img class="img-icon-controls" src="./images/controls/end-call.png"  alt="End Call"/></button>
-			</div>
-		</div>
-	</div>
     <script src="https://unpkg.com/webex/umd/webex.min.js"></script>
 	<script src='https://unpkg.com/webex@2.60.0-next.2/umd/calling.min.js'></script>
 	<script type="text/javascript" src="./js/timer.js"></script>

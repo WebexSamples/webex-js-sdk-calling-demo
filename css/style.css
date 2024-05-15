@@ -2879,20 +2879,16 @@ button.btn1:hover {
   display: none;
 }
 
-.keypad-container.agent-numpad {
-  position: fixed;
-  top: 125px;
-  right: 2px;
-  width: 17rem;
-  box-shadow: 0px 3px 5px rgba(0, 0, 0, 0.5);
-  visibility: hidden;
-  opacity: 0;
-  transition-duration: 0.25s;
-  /* -moz-transition-duration: 0.5s;
-	-webkit-transition-duration: 0.5s;
-	-o-transition-duration: 0.5s;
-	-ms-transition-duration: 0.5s; */
-  transition: height 0.25s ease-in;
+.keypad-container.agent-numpad{
+	position:fixed;
+	top: 130px;
+    right: 10px;
+	width: 17rem;
+	box-shadow: 0px 3px 5px rgba(0,0,0,0.5);
+	visibility: hidden;
+	opacity: 0;
+	transition: all 0.25s ease-in;
+	
 }
 
 .keypad-container.agent-numpad.show {
@@ -2918,28 +2914,41 @@ button.btn1:hover {
 
 /* Incoming Call Notification Styles */
 .incoming-call-notification {
-  display: flex;
-  align-items: center;
-  justify-content: start;
-  background-color: #000;
-  color: white;
-  padding: 10px;
-  border-radius: 5px;
-  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.5);
-  position: fixed;
-  top: 130px; /* Start hidden above the screen */
-  right: -330px;
-  min-width: 320px; /* Set a minimum width */
-  max-width: 100%; /* Ensure it doesn't exceed the screen width */
-  opacity: 0;
-  transition: right 0.2s ease-in-out, opacity 0.5s ease-in-out;
-  z-index: 9999; /* Ensure it floats above other content */
+    background-color: #000;
+    color: white;
+    padding: 10px;
+    border-radius: 5px;
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.5);
+    position: fixed;
+    top: 130px; /* Start hidden above the screen */
+    right: -330px;
+    min-width: 320px; /* Set a minimum width */
+    max-width: 100%; /* Ensure it doesn't exceed the screen width */
+	opacity: 0;
+    transition: right 0.25s ease-in-out, opacity 0.5s ease-in-out;
+    z-index: 9998; /* Ensure it floats above other content */
+}
+
+.incoming-call-notification .notifier-a{
+	display: flex;
+	align-items: center;
+	justify-content: start;
 }
 
 /* To make the notification visible, add a class or modify the top property to 10px */
 .incoming-call-notification.show-notification {
   opacity: 1;
   right: 50px; /* Adjust spacing from the top as needed */
+}
+
+#secondCallNotification.incoming-call-notification.show-notification{
+	opacity: 1;
+    right: 135px;
+    min-width: 150px;
+}
+
+.incoming-call-notification.show-notification.switch-look {
+	right: 300px;
 }
 
 .incoming-call-notification.timestate .call-actions .attend-call-btn {
@@ -2950,9 +2959,22 @@ button.btn1:hover {
   display: none;
 }
 
-.incoming-call-notification.timestate .call-time {
-  margin-right: 15px;
-  display: flex;
+.incoming-call-notification.timestate .call-time{
+	margin: 7.5px;
+	display: block;
+}
+
+.incoming-call-notification.timestate .call-time span#hold-status{
+	display: none;
+}
+
+.incoming-call-notification.timestate .call-time.on-hold span#hold-status{
+	display: block;
+	color: orange;
+}
+
+.incoming-call-notification.timestate .call-time.on-hold span#timer{
+	display: none;
 }
 
 .avatar {
@@ -2975,23 +2997,24 @@ button.btn1:hover {
   text-overflow: ellipsis; /* Add ellipsis if the text is too long */
 }
 
-.call-actions {
-  display: flex;
-  gap: 10px;
-  flex-shrink: 0; /* Prevent the buttons from shrinking */
+.call-actions button{
+    margin-right: 10px;
+}
+
+.timestate.switch-look .call-actions button{
+	margin-right: 0px;
 }
 
 .attend-call-btn,
 .cut-call-btn {
-  padding: 8px;
-  font-size: 16px;
-  border: none;
-  border-radius: 50%;
-  cursor: pointer;
-  color: white;
-  display: flex; /* Ensure icons center within buttons */
-  align-items: center;
-  justify-content: center;
+    padding: 8px;
+    font-size: 16px;
+    border: none;
+    border-radius: 50%;
+    cursor: pointer;
+    color: white;
+    height: 36px;
+	width: 36px;
 }
 
 .attend-call-btn {
@@ -3000,7 +3023,6 @@ button.btn1:hover {
 
 .cut-call-btn {
   background-color: #dc3545;
-  height: 36px;
 }
 
 .attend-call-btn:hover {
@@ -3009,6 +3031,65 @@ button.btn1:hover {
 
 .cut-call-btn:hover {
   background-color: #c82333;
+}
+
+.notifier-a-controls.hide-controls{
+	display: flex;
+	align-items: center;
+	justify-content: space-between;
+	border-top: 0.5px solid #ccc;
+	margin-top: 0px;
+	padding:0px;
+	padding-bottom: 0;
+	height:0px;
+	opacity: 0;
+}
+
+.notifier-a-controls{
+	display: flex;
+	align-items: center;
+	justify-content: space-between;
+	border-top: 0.5px solid #ccc;
+	margin-top: 5px;
+	padding:5px;
+	padding-bottom: 0;
+	transition: all 0.2s ease-in-out;
+}
+
+.notifier-a-controls button {
+    color: white;
+    background: black;
+    border: 1px solid black;
+	text-align: center;
+	width: 100%;
+}
+
+.notifier-a-controls button.mute:hover,
+.notifier-a-controls button.hold:hover,
+.notifier-a-controls button.mute.muted,
+.notifier-a-controls button.hold.held{
+	color:#dc3545;
+}
+
+.notifier-a-controls button.transfer.in-progress,
+.notifier-a-controls button.transfer:hover{
+	color: rgba(25, 176, 25, 0.894)
+}
+
+.notifier-a-controls button.transfer.disabled{
+	color: grey;
+	cursor: not-allowed;
+}
+
+.incoming-call-notification.switch-look{
+	min-width: unset;
+	transition: all 0.2s ease-in-out;
+}
+
+.incoming-call-notification.switch-look .notifier-a{
+	display: block;
+	text-align: center;
+	transition: all 0.2s ease-in-out;
 }
 
 /* ... (rest of your styles) ... */
@@ -3137,10 +3218,10 @@ button.btn1:hover {
   font-weight: bold;
 }
 
-.call-date,
+.call-date, 
 .call-time {
-  color: #666;
-  font-size: 14px;
+	color: #979696;
+	font-size: 14px;
 }
 
 .call-indicator {
@@ -3293,6 +3374,23 @@ h6 {
   cursor: pointer;
   display: flex;
   align-items: center;
+  position: relative;
+}
+
+.dropbtn #availability{
+	color: #28a745;
+	position: absolute;
+	font-size: 12px;
+	bottom: 0;
+	left: 35px;
+	visibility: hidden;
+	opacity: 0;
+	transition: all 0.25s ease-in;
+}
+
+.dropbtn #availability.online{
+	visibility: visible;
+	opacity: 1;
 }
 
 /* Avatar image */
@@ -3334,9 +3432,35 @@ h6 {
 /* Show the dropdown menu */
 .show {display: block;}  
 
+.blink_me {
+	animation: blinker 1.2s linear infinite;
+}
+  
+@keyframes blinker {
+	50% {
+		opacity: 0;
+	}
+}
+
 .agent-tab .nav-tabs.myTrips li:hover a#upcoming-tab,.agent-tab  .nav-tabs.myTrips li.active a#upcoming-tab {
     color: #ff9a07;
 }
 .mytrips-tab .nav-tabs.myTrips li:hover a#upcoming-tab,.mytrips-tab  .nav-tabs.myTrips li.active a#upcoming-tab {
     color:#1b77fa;
+}
+
+
+.tooltip-calling {
+	display: none;
+	position: fixed;
+	background-color: #333;
+	color: #fff;
+	padding: 5px 10px;
+	border-radius: 4px;
+	font-size: 13px;
+	z-index: 9999;
+}
+  
+.tooltip-calling.show-tooltip {
+	display: block;
 }
