@@ -135,8 +135,15 @@ async function initiateCall(number) {
         });
     
         call.on('connect', (correlationId) => {
-            secondCallNotification.startTimer();
-            secondCallNotification.enableCompleteTransfer();
+            if(number === "5007"){
+                secondCallNotification.startTimer();
+                secondCallNotification.enableCompleteTransfer();
+            }
+            else{
+                if(window.location.href.includes('mytrips')){
+                    callNotification.startTimer();
+                }
+            }
         });
     
         call.on('remote_media', (track) => {
@@ -157,8 +164,6 @@ async function initiateCall(number) {
 async function answerCall() {
     try {
         fetchCallerBooking();
-        // openCallWindow();
-        // callWindowHeaderTimer.start();
 
         await getMediaStreams();
 
