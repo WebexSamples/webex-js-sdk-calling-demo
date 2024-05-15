@@ -213,7 +213,7 @@ function renderCallHistoryItem(call) {
             <div class="call-name">${
               call.other.name === "Priya Kesari"
                 ? "Harvey Specter"
-                : "Harvey Specter"
+                : "Jane Doe"
             }</div>
             <div class="call-phone">${call.other.phoneNumber}</div>
           </div>
