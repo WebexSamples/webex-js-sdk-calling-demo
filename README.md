@@ -3,9 +3,10 @@
 ## Run this demo in your localhost
 
 1. Clone this Repo
-2. Do `yarn install`
-3. Do `yarn start`
-4. Navigate to [http://127.0.0.1:9000](http://127.0.0.1:9000)
+2. Get access token for users registered with Webex Calling. If you don't have an account request for a sandbox - https://developer.webex.com/docs/developer-sandbox-guide
+3. In "js/app.js", put the access tokens (line 126, 128)
+4. Run `yarn start`
+5. Navigate to [http://127.0.0.1:9000](http://127.0.0.1:9000)
 
 ## Contact Us
 
@@ -13,7 +14,6 @@
 
 - Webex SDK Contributors - https://eurl.io/#v-LbYXL27
 - Chrome extension support space - https://eurl.io/#YbnG_BwcN
-
 
 ### Developer Support
 
@@ -37,10 +37,11 @@
 - [Github Wiki](https://github.com/webex/webex-js-sdk/wiki)
 
 #### Calling
+
 - [Introducing the Webex Web Calling SDK](https://github.com/webex/webex-js-sdk/wiki/Introducing-the-Webex-Web-Calling-SDK)
-- [Core Concepts](https://github.com/webex/webex-js-sdk/wiki/Core-Concepts-(Calling))
-- [Quickstart guide](https://github.com/webex/webex-js-sdk/wiki/Quickstart-Guide-(Calling))
-- [Authorization](https://github.com/webex/webex-js-sdk/wiki/Authorization-(Calling))
+- [Core Concepts](<https://github.com/webex/webex-js-sdk/wiki/Core-Concepts-(Calling)>)
+- [Quickstart guide](<https://github.com/webex/webex-js-sdk/wiki/Quickstart-Guide-(Calling)>)
+- [Authorization](<https://github.com/webex/webex-js-sdk/wiki/Authorization-(Calling)>)
 - **Basic Features**
   - [Incoming and outgoing calls](https://github.com/webex/webex-js-sdk/wiki/Incoming-and-Outgoing-Calls)
 - **Advanced Features**
