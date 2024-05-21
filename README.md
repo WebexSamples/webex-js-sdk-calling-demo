@@ -8,6 +8,11 @@
 4. Run `yarn start`
 5. Navigate to [http://127.0.0.1:9000](http://127.0.0.1:9000)
 
+## Important files
+1. mytrips.html - This file contains the customer dashboard, can be used to initiate an outbound call.
+2. agent.html - This file contains the agent dashboard, can be used to receive a call and initiate transfers.
+3. sdk/calling-sdk.js - This file contains functions that utilize the calling SDK.
+
 ## Contact Us
 
 ### Support Spaces on Webex
