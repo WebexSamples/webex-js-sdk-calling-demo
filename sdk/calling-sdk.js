@@ -22,8 +22,8 @@ const callNotifyEvent = new CustomEvent('line:incoming_call', {
 // Step 1: Initialize Calling, pass calling config with relevant values to setup different clients available in the Calling SDK
 // Step 2: Fetch the calling client, fetch the lines created for the user whose access token has been shared and register the line
 async function initCalling(userType) {
-    const webexConfig = getWebexConfig(userType);
-    const callingConfig = getCallingConfig();
+    const webexConfig = await getWebexConfig(userType);
+    const callingConfig = await getCallingConfig();
 
     // Initializing Calling
     calling = await Calling.init({ webexConfig, callingConfig });
@@ -115,17 +115,21 @@ async function getMediaStreams() {
 // Step 5: Create a call instance, get the stream and initiate an outbound call. Setup call listeners are the same time to the call progressing different states
 async function initiateCall(number) {
    try {
-        const destination = {
-            value: number
-        };
-        openCallWindow(number);
         await getMediaStreams();
-    
-        // Create call object
-        call = line.makeCall({
-            type: 'uri',
-            address: destination.value,
-        });
+        if (number) {
+            const destination = {
+                value: number
+            };
+            openCallWindow(number);
+            // Create call object
+            call = line.makeCall({
+                type: 'uri',
+                address: destination.value,
+            });
+        } else {
+            openCallWindow();
+            call = line.makeCall();
+        }
     
         call.on('caller_id', (CallerIdEmitter) => {
            updateCallerId(CallerIdEmitter);
