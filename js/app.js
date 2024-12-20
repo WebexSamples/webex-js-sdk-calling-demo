@@ -100,32 +100,6 @@ function openCallNotification(callObj) {
   callNotifyEvent.detail.callObject = callObj;
 }
 
-// async function refreshGuestToken() {
-//   const myHeaders = new Headers();
-//   myHeaders.append("Content-Type", "application/x-www-form-urlencoded");
-  
-//   const urlencoded = new URLSearchParams();
-//   urlencoded.append("grant_type", "refresh_token");
-//   urlencoded.append("client_id", "");
-//   urlencoded.append("client_secret", "");
-//   urlencoded.append("refresh_token", refresh_token);
-
-//   const request = {
-//     method: "POST",
-//     headers: myHeaders,
-//     body: urlencoded,
-//     redirect: "follow"
-//   };
-
-//   fetch("https://webexapis.com/v1/access_token", request)
-//     .then((response) => response.json())
-//     .then((result) => {
-//       console.log(result);
-//       service_app_token = result.access_token;
-//     })
-//     .catch((error) => console.error(error));
-// }
-
 async function getGuestToken() {
   const myHeaders = new Headers();
   myHeaders.append("Content-Type", "application/json");
@@ -176,14 +150,17 @@ async function getJweToken() {
 }
 
 async function getWebexConfig(userType) {
-  // Below values are hardcoded tokens for licensed users
-  // let access_token;
-  // if (userType === 'customer') {
-  //   access_token = "";
-  // }
-  // else {
-  //   access_token = ""
-  // }
+  /*
+    Below values are hardcoded tokens for testing to be done for licensed users
+    let access_token;
+    if (userType === 'customer') {
+      access_token = "";
+    }
+    else {
+      access_token = ""
+    }
+  */
+
  const guestToken = await getGuestToken();
  console.log('Guest token fetch success: ', guestToken);
   const webexConfig = {
