@@ -11,6 +11,9 @@ const secondCallTimer = document.querySelector('#secondCallNotification #call-ti
 const profileDropDown = document.getElementById("myDropdown");
 const profileOnline = document.querySelector(".dropbtn #availability");
 
+let service_app_token = ''; // Add the service app account token here
+// const refresh_token = '';
+
 class callNotificationElement {
     constructor(element,callTimerElement){
         this.callNotification = element;
@@ -97,14 +100,69 @@ function openCallNotification(callObj) {
   callNotifyEvent.detail.callObject = callObj;
 }
 
-function getWebexConfig(userType) {
-  let access_token;
-  if (userType === 'customer') {
-    access_token = "eyJhbGciOiJSUzI1NiJ9.eyJjbHVzdGVyIjoiUDBBMSIsInByaXZhdGUiOiJleUpqZEhraU9pSktWMVFpTENKbGJtTWlPaUpCTVRJNFEwSkRMVWhUTWpVMklpd2lZV3huSWpvaVpHbHlJbjAuLmdHRjFiZ0VYSTFRdUJFX2JKbUp4UmcuaHJmWUd5cEpMeDdERVBTdW9uWHFrdVkwSkhyNFIydURIVDNZaWlEVnQxWU9JOTNTSklRN3dBcmQ4RVZLN2dWSXBxRDd2ODI5QmRXb21DZGhhVUFhQ1RSdm9uNGZlV2NEOVRLb055TmUxeXZ3UFRiQmVJdFhONTZ2bVpCSmFqNGJFX0VuUW9QZFBaZzB4NVRBVmJ5c0VGdFlPMHNGMV9KckEyYzJqcVRBa0NQLVpGTndUV2ctTG9adU9DWHphUVIyeWdxc3hlZ2QyVWNRanRDc0N0MGN1cFMwalR1Si1YQXRySUZDT1RiQVNCNUxTaUJlNjkzV01DbjgySmpXSmJ1RF96eG9TT3QxQUU4eXVMdGhEdWx6UWxneDgxY1Z1dGZPWWxqdU9XN0k0dDYtdzMyMmdZUFpseEF4azhoc0dGLUV1ZU81TGQyX0k3QUNmTmZma3BiZzR5U2s4d05PWVo3a29pZ1dQWnQtSDNXTGNLQmhoeWxfYm9kWW1WMnJ1WVRQeU1mNE1mRmtQaWgzZEVZUFFhX252ZHFaSWhjeHhvS1FROW95NW5IZ3dsWnktZ2RtZDhxenpvenZUSUJzQ3Q1TmxMWVVVVjB5azFBQUFwSzlWNTYzTzcxSlFERV9IbC1UcF9UY3ZzNTZQMmt4elZKekJlazQ5NXNULXdiamdleUROQThsTlZHNFl2R1Y5MWdJRDRtY1VaZkZ0LTJwcFR1OVZJa0taWWxlQUxOOW9HcDVUZjJPQ0JpeEpfQWp6dmcyNFY4SWJWVzFvLVBMWDhLYTlHZy16Y1lVcFRXV3BqZERxb3NUUUUzX2owR2hFTk1BVDhzWFBuZFVGYmRkQzhQb0xuR0RYejE4Um5Zd2dLZzl4amRacTRKeE84b3FvVDhiMUFyeTA4TEZ2R05jcHJjU0ZiTDNLc3VqQUh5bEpPNWdCWEZDNHVkMUwyZHpEWGR5QzYtZk4tR3pCUEZZMVRxSGxldDc3ZGpFYVVxNkdRekpOa21pWVZpcmdwdnBfX0xVcWFnSWVCaVA5UlRCR1R2RW1LcUJlcUlJaU5BTGFmYm54Tlh3QUQ3SV9Bby5rbnpjbURKOEJJdS1pa3dvY01HeXVRIiwidXNlcl90eXBlIjoidXNlciIsInRva2VuX2lkIjoiQWFaM3IwTVdWbFl6bGpaalV0TVdWaE9TMDBZakZoTFRoaU1qWXRZekEyWW1JNE5qaGtNVEJtTkdOa01qSmhNRE10Wm1VMyIsInJlZmVyZW5jZV9pZCI6IjBjOTE3MmU0LTFhMjgtNGMzNC04ZmI4LTRhZGFjMzdiZDhhYiIsImlzcyI6Imh0dHBzOlwvXC9pZGJyb2tlci1iLXVzLndlYmV4LmNvbVwvaWRiIiwidXNlcl9tb2RpZnlfdGltZXN0YW1wIjoiMjAyMzA1MjYwNzQ2MDAuMTY5WiIsInJlYWxtIjoiYjY1N2ZjZjMtNmIwNi00NmE0LWFiMGUtZjIzZmNlYjdhNDQ3IiwiY2lzX3V1aWQiOiJiNzJiY2FmNi0zZjMwLTQ3YmEtODAzOC0zMzhkOGQwZTU3NzIiLCJ0b2tlbl90eXBlIjoiQmVhcmVyIiwiZXhwaXJ5X3RpbWUiOjE3MTU4MDkwNTI4MzcsImNsaWVudF9pZCI6IkM2NGFiMDQ2MzllZWZlZTQ3OThmNThlN2JjM2ZlMDFkNDcxNjFiZTBkOTdmZjBkMzFlMDQwYTZmZmU2NmQ3ZjBhIn0.PP_W4FjXPSTbLP2FJJ5Z1z59dQ1WIiZlQtKnW3V4giKJsHI6vxRyPZNArYxq0a1cWSrw2gi_UPRQH62PnztQLMsdHQ1ONVPBWtudkpOkiui1BNSca6Uyu3u2IEYt3Qvyer7wI5P2PDbkqkLlJ52Wh4G-BDYyxGJKgOTxtoAKLIbL8_BHWBCdkYGWi_APJYzkZhkYsBc_KksdMow92wGnCQnqNvs4wVn0ApzrUOtAVZZT-nIiA181oPmL5Tk7royyFlyH3csuR9hDb-G-u8KKszs5TqFF9_YbcKN7iXyUnXOM8OQ_kPDnuu4wenyTN_yUO4CZ5vlQo_9BP1AkZ7wGkQ";
-  } else {
-    access_token = 'eyJhbGciOiJSUzI1NiJ9.eyJjbHVzdGVyIjoiUDBBMSIsInByaXZhdGUiOiJleUpqZEhraU9pSktWMVFpTENKbGJtTWlPaUpCTVRJNFEwSkRMVWhUTWpVMklpd2lZV3huSWpvaVpHbHlJbjAuLlFoMzdWRW1PN05mVGhUdnVrRnpHUWcuelNkejVid1UxZlhwZkkxQU1xZUlMc1FuV2ZhYjQ4ZHp4NGc1TTNKaGtfblJtbUZpcXRJTjBmLUItYzBWWERmUmZ1VUt6T25NTU1iVWFHaXVqR1lJZUJnZmhUR0h2MVlNd01KdUxKeTJfTXRINm1HR1hZN3Z5TjR3UFFsMHBqSUVEMVplZkd2enRsUkFoVmhPdVRIM2FvZ2xwbG50YlJwWFJSYzA5a0dNRnh6ZldhbnZKRXBXalhwMlBKN3FtRU1YYlBpdkF4dF82Z3F6dGwweXZfdDV6MGkxOWRvTlhUX2hfUWp6djdCa0gtOXpKSENrRjZ4TWw3MnNSRGR6WmtyOTVyOXZnVjhuSVRqelFvQzA1SElPNk5Xb20tbnFYdzNENXVoRDc2T05jeU9LVTJwTE5pSkpPUDdvZ25TVERCX0tuQXRRT29GSHVDT0ptN1pNYWkwZUJyajRGNnZpUlZRbkJ0ZlZGTjBtaTRBY3BFWVlTS3ZYeHVpZVNzWXNna1p3QWRSVUU5eHl1RFpfMFVESlRfdjNfTkZNMUs3NzJNOEpCcUNPSzVVVXR4M2I2LTZqa1dWRUpPZkFkSmNGb05DeWdzV25PcnZ1UHRhWWFCdmI3Zl8xWm5MVUdLZjh1SXhDa1BQaC1fRVZwRlliSlpJSFNMbVFpSFAzc1FjUFFLcnkwQlFESFg5XzlCeXRWRkhvdmp0eVI3VVhfUmkxNHA1ellIcXlfOThVTXFKTWVmV3hHX1Y5UzBOc3ZqZmFMUkFXSTdGME5sN0dMVmVhaGhFZmdZN0xMWXFwV1NJTWZpbmlTc2k0WG5oRGNPWU9vNmFSR2RCSW9Ia3pIcGxYa0ZrT3NhcFpXM1NkNmp1UFV0TXlZNmljaTFKOGd3eEs5V016VTRMT2h5NHBQRXlvUjdnRTJkRGs1UXJpbmoxVkp0ZWpmbC1Xemw2V3AySlZuV3FmV05yQjVuT2QzU1hkZUQ5cVFOUGF5RDFjSThVTmlUZU81R0x2UzA0NmFxS0FuV3ZENFBTeThDUzlvNFVfZkdmbTB6Rm1aRDVzUXhxRzloVlhaQ0drUGI0eXJKZy5jeGE4bFZTRC1DUGVvVGpBZG9ja2V3IiwidXNlcl90eXBlIjoidXNlciIsInRva2VuX2lkIjoiQWFaM3IwTkRVellqSmtPV010WmpKaE15MDBNemM0TFdFeFpXUXRPVGd4TVdJeE1tSm1NMkU0TXpCalpqRXdORGt0TVRBeSIsInJlZmVyZW5jZV9pZCI6ImI5MTA0ZWFiLWFhNWEtNDI4MC04MjAxLTRhYWE3YzcxYjhkOSIsImlzcyI6Imh0dHBzOlwvXC9pZGJyb2tlci1iLXVzLndlYmV4LmNvbVwvaWRiIiwidXNlcl9tb2RpZnlfdGltZXN0YW1wIjoiMjAyMzA2MDkxMDAyNDQuMzgyWiIsInJlYWxtIjoiYjY1N2ZjZjMtNmIwNi00NmE0LWFiMGUtZjIzZmNlYjdhNDQ3IiwiY2lzX3V1aWQiOiIwM2NmOWQzNC02ZGE5LTQxNTctYmRlZS1iODg0NzQ3Zjk1Y2IiLCJ0b2tlbl90eXBlIjoiQmVhcmVyIiwiZXhwaXJ5X3RpbWUiOjE3MTU4MDg5NjAyOTMsImNsaWVudF9pZCI6IkM2NGFiMDQ2MzllZWZlZTQ3OThmNThlN2JjM2ZlMDFkNDcxNjFiZTBkOTdmZjBkMzFlMDQwYTZmZmU2NmQ3ZjBhIn0.aJ_JzMqlSSA8s3IGU8_R-FPmVFmvbqkwUNOIR6o-gc9l6IkNPaczsyfjGvovkAtmHISPJRNxnq0Qfgam9fCKkDPwJH173uN1jNkm_baJ7qmin-1SrCKazM1xzfxNdv5FABO6kZEa1RBcF0238-soJ5Dbc-bVEsNZHNSX0rklKJLh6ediY2Fs1Bk4hhlkrgLf_ZPJslOVO_DaG2t6lnHA6x_ohwMbZKL9LZNrkhu7UDGdu5UnmjpYnCtUNZb2zjRm9R2iNxXiwobGaVpKea_84FvhNUvmI2yhqu1Itz8zQNxQHbT7QSRLS1uZpGR9-2T_x6Ra2OItoJ1Rza2vcnm04w';
+async function getGuestToken() {
+  const myHeaders = new Headers();
+  myHeaders.append("Content-Type", "application/json");
+  myHeaders.append("Authorization", `Bearer ${service_app_token}`);
+
+  const raw = JSON.stringify({
+    "subject": "Webex Click To Call Demo",
+    "displayName": "WebexOne Demo"
+  });
+
+  const request = {
+    method: "POST",
+    headers: myHeaders,
+    body: raw,
+    redirect: "follow"
+  };
+
+  const response = await fetch("https://webexapis.com/v1/guests/token", request);
+  const data = await response.json();
+  
+  if (data.accessToken) {
+    return data.accessToken;
   }
- 
+}
+
+async function getJweToken() {
+  const myHeaders = new Headers();
+  myHeaders.append("Content-Type", "application/json");
+  myHeaders.append("Authorization", `Bearer ${service_app_token}`);
+
+  const payload =  JSON.stringify({
+    "calledNumber": "", // Place your call queue/hunt group/destination number here
+    "guestName": "" // Any guest name can be given
+  });
+
+  const request = {
+    method: "POST",
+    headers: myHeaders,
+    body: payload,
+    redirect: "follow"
+  };
+  
+  const response = await fetch("https://webexapis.com/v1/telephony/click2call/callToken", request);
+  const result = await response.json();
+  if (result.callToken) {
+    return result.callToken;
+  }
+}
+
+async function getWebexConfig(userType) {
+  /*
+    Below values are hardcoded tokens for testing to be done for licensed users
+    let access_token;
+    if (userType === 'customer') {
+      access_token = "";
+    }
+    else {
+      access_token = ""
+    }
+  */
+
+ const guestToken = await getGuestToken();
+ console.log('Guest token fetch success: ', guestToken);
   const webexConfig = {
     config: {
       logger: {
@@ -125,14 +183,17 @@ function getWebexConfig(userType) {
       dss: {},
     },
     credentials: {
-      access_token: access_token,
+      access_token: guestToken,
     },
   };
 
   return webexConfig;
 } 
 
-function getCallingConfig() {
+async function getCallingConfig() {
+    const jweToken = await getJweToken(); 
+    console.log('Jwe Token: ', jweToken);
+
     const clientConfig = {
       calling: true,
       callHistory: true,
@@ -142,17 +203,18 @@ function getCallingConfig() {
       level: "info",
     };
   
-    const serviceData = { indicator: "calling", domain: "" };
+    const serviceData = { indicator: 'guestcalling', domain: '', guestName: 'Harvey'};
   
     const callingClientConfig = {
       logger: loggerConfig,
       discovery: {
-        region: "",
-        country: "",
+        region: "US-EAST",
+        country: "US",
       },
       serviceData,
-    };
-  
+      jwe: `${jweToken}`
+    }
+
     const callingConfig = {
       clientConfig: clientConfig,
       callingClientConfig: callingClientConfig,
