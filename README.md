@@ -10,7 +10,11 @@
 3. Do `yarn start`
 4. Navigate to [http://127.0.0.1:9000](http://127.0.0.1:9000)
 5. Navigate to My Trips to start the click-to-call setup
-6. Click "Call Support" on the first item to place the call towards the destination set in Step 2b.
+6. Wait for a green circle icon to show up next to Harvey's avatar on the top-right corner of the screen.
+   This indicates that we are registered with Webex Calling. If the green icon does not show up after
+   waiting for 30-40 seconds, there might be an error registering with Webex Calling. Please check the
+   console and network logs to determine what might be going wrong.
+7. Click "Call Support" on the first item to place the call towards the destination set in Step 2b.
 
 ## Contact Us
 
