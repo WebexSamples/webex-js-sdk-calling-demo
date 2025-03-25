@@ -1,8 +1,11 @@
-## Webex Web SDK | Calling Demo
+## Webex Web SDK | Webex Click-to-call Demo
 
 ## Run this demo in your localhost
 
 1. Clone this Repo
+2. In js/app.js, set these variables
+  a. Update `service_app_token` with the access token of the service app created for Click-to-Call
+  b. Update `calledNumber` with the destination number you'd like to place the call to.
 2. Do `yarn install`
 3. Do `yarn start`
 4. Navigate to [http://127.0.0.1:9000](http://127.0.0.1:9000)
